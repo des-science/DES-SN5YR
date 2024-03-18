@@ -1,5 +1,5 @@
 ### Hubble diagrams
-We provide two Hubble diagrams, one including only the essential information for comsology, and one including additional metadata.
+We provide two Hubble diagrams, one including only the essential information for cosmology (DES-SN5YR_HD.csv) and one including additional metadata (DES-SN5YR_HD+MetaData.csv)
 
 **DES-SN5YR_HD.csv**
 
