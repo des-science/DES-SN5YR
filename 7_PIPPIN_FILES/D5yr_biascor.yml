@@ -1,0 +1,142 @@
+# Before using this input file:
+#  - check keys below with CHANGE in comment field
+#  - check optional OUTPUT redirect
+#
+# % include: $SNDATA_ROOT/sample_input_files/DES-SN5YR/D5yr_anchors_lcfit.yml %
+# % include: $SNDATA_ROOT/sample_input_files/DES-SN5YR/D5yr_anchors_sim.yml %
+
+GLOBAL:
+  CFG_PATH: cfg.yml   # CHANGE
+
+# Use OUTPUT key here to redirect output from default $PIPPIN_OUTPUT
+#  OUTPUT:
+#    output_dir: $DES5YR/pippin_output/test
+
+ALIAS:
+  FOUNDKCOR: &foundkcor
+     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_Foundation.fits.gz
+  LOWZKCOR: &lowzkcor
+     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_LOWZ.fits.gz
+  DESKCOR: &deskcor
+     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_DES.fits.gz
+
+
+  BATCHINFO: &batchinfo
+     BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 5 # CHANGE
+
+
+SIM:
+  BIASCORSIM_LOWZ:
+    IA_P21:
+      <<: *lowz_general
+      <<: *s3model
+      <<: *p21_inputs
+      <<: *simalpha
+      <<: *host_lowz
+      <<: *lowz_genpdfp21
+      <<: *lowzkcor
+    GLOBAL:
+      <<: *biascorsim_size
+      <<: *cosmology
+      <<: *mwopt
+      <<: *batchinfo
+
+  BIASCORSIM_FOUND:
+    IA_P21:
+      <<: *found_general
+      <<: *s3model
+      <<: *p21_inputs
+      <<: *simalpha
+      <<: *host_lowz
+      <<: *found_genpdfp21
+      <<: *foundkcor
+    GLOBAL:
+      <<: *biascorsim_size
+      <<: *cosmology
+      <<: *mwopt
+      <<: *batchinfo
+
+  BIASCORSIM_DES:
+    IA_P21:
+      <<: *des_genpdfp21
+      <<: *s3model
+      <<: *p21_inputs
+      <<: *simalpha
+      <<: *host_des
+      FLUXERRMODEL_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_FLUXERRMODEL_SIM.DAT
+      GENMAG_SMEAR_ADDPHASECOR: 0.0 10.0
+      DNDZ: POWERLAW 2.27E-5 1.7 ##Frohmaier 2018
+      HOSTLIB_WGTMAP_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_DES.WGT
+      <<: *deskcor
+    GLOBAL:
+      <<: *biascorsim_size
+      <<: *cosmology
+      <<: *mwopt
+      <<: *batchinfo
+
+  BIASCORSIM_DESCC:
+    PECIAX:
+      BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/sim/sn_iax_dust.input
+      HOSTLIB_WGTMAP_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_DES_TypeIax.WGT
+    PECIA91BG:
+      BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/sim/sn_ia91bg.input
+      HOSTLIB_WGTMAP_FILE:  $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_DES_TypeIa91bg.WGT
+    II_TEMPLATES:
+      BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/sim/sn_ii_v19_li11revised_nodust.input
+      HOSTLIB_WGTMAP_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_DES_TypeII.WGT
+    Ibc_TEMPLATES:
+      BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/sim/sn_ibc_v19_li11revised_nodust.input
+      HOSTLIB_WGTMAP_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_DES_TypeIbc.WGT
+    GLOBAL:
+      <<: *host_des
+      FLUXERRMODEL_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_FLUXERRMODEL_SIM.DAT
+      GENMAG_SMEAR_ADDPHASECOR: 0.0 10.0
+      <<: *cosmology
+      <<: *mwopt
+      <<: *deskcor
+      <<: *biascorsim_size
+      <<: *batchinfo
+
+LCFIT:
+  L3:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lowz_fordes5yr.nml
+    MASK: LOWZ
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *minos_on
+      <<: *lowzkcor
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      <<: *appendfitres
+      <<: *batchinfo
+
+  F3:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/found_des5yr.nml
+    MASK: FOUND
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *minos_on
+      <<: *foundkcor
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      <<: *appendfitres
+      <<: *batchinfo
+
+  D3:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/desSMP_5yr.nml
+    MASK: DES
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *minos_on
+      <<: *deskcor
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      <<: *appendfitres_des
+      <<: *batchinfo
+      BATCH_MEM: 16GB

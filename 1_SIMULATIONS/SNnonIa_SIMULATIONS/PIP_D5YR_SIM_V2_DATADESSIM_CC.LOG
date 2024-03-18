@@ -1,0 +1,92 @@
+ Program class : Simulation 
+
+PIP_D5YR_SIM_V2_DATADESSIM_CC.input
+ Program name: snlc_sim.exe
+	 Batch command:    sbatch
+	 Batch template:   /project2/rkessler/PRODUCTS/SNANA/SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE
+	 Batch n_core:     25
+ Create output dir:
+   /scratch/midway2/rkessler/PIPPIN_OUTPUT/D5YR_SIM_V2/1_SIM/DATADESSIM_CC/LOGS
+	 Copy 6 sim-input files to LOGS
+  Create command files:
+	 Create CPU0000_JOBLIST_midway2-login1.CMD
+	 Create CPU0001_JOBLIST_midway2-login1.CMD
+	 Create CPU0002_JOBLIST_midway2-login1.CMD
+	 Create CPU0003_JOBLIST_midway2-login1.CMD
+	 Create CPU0004_JOBLIST_midway2-login1.CMD
+	 Create CPU0005_JOBLIST_midway2-login1.CMD
+	 Create CPU0006_JOBLIST_midway2-login1.CMD
+	 Create CPU0007_JOBLIST_midway2-login1.CMD
+	 Create CPU0008_JOBLIST_midway2-login1.CMD
+	 Create CPU0009_JOBLIST_midway2-login1.CMD
+	 Create CPU0010_JOBLIST_midway2-login1.CMD
+	 Create CPU0011_JOBLIST_midway2-login1.CMD
+	 Create CPU0012_JOBLIST_midway2-login1.CMD
+	 Create CPU0013_JOBLIST_midway2-login1.CMD
+	 Create CPU0014_JOBLIST_midway2-login1.CMD
+	 Create CPU0015_JOBLIST_midway2-login1.CMD
+	 Create CPU0016_JOBLIST_midway2-login1.CMD
+	 Create CPU0017_JOBLIST_midway2-login1.CMD
+	 Create CPU0018_JOBLIST_midway2-login1.CMD
+	 Create CPU0019_JOBLIST_midway2-login1.CMD
+	 Create CPU0020_JOBLIST_midway2-login1.CMD
+	 Create CPU0021_JOBLIST_midway2-login1.CMD
+	 Create CPU0022_JOBLIST_midway2-login1.CMD
+	 Create CPU0023_JOBLIST_midway2-login1.CMD
+	 Create CPU0024_JOBLIST_midway2-login1.CMD
+ BATCH DRIVER JOB COUNT SUMMARY: 100 jobs on 25 cores
+  Create MERGE.LOG
+  Create SUBMIT.INFO
+	 pid = 27363556 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0000
+	 pid = 27363557 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0001
+	 pid = 27363558 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0002
+	 pid = 27363559 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0003
+	 pid = 27363560 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0004
+	 pid = 27363561 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0005
+	 pid = 27363562 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0006
+	 pid = 27363563 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0007
+	 pid = 27363564 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0008
+	 pid = 27363565 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0009
+	 pid = 27363566 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0010
+	 pid = 27363567 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0011
+	 pid = 27363568 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0012
+	 pid = 27363569 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0013
+	 pid = 27363570 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0014
+	 pid = 27363571 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0015
+	 pid = 27363572 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0016
+	 pid = 27363573 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0017
+	 pid = 27363574 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0018
+	 pid = 27363575 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0019
+	 pid = 27363576 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0020
+	 pid = 27363577 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0021
+	 pid = 27363578 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0022
+	 pid = 27363579 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0023
+	 pid = 27363580 for PIP_D5YR_SIM_V2_DATADESSIM_CC.input-CPU0024
+No warnings
+No errors
+ Done launching jobs. Sit back and relax.
+ Check status in LOGS/MERGE.LOG 
+
+ sim_prep_GENOPT(PIP_D5YR_SIM_V2_DATADESSIM_CC) 
+	 GENOPT(sn_iax_dust.input): HOSTLIB_WGTMAP_FILE $DES_USERS/mvincenzi/MYPIPPIN/sims_instrument/WGT_maps_SVAUR/DES_WGTMAP_MassSFR_Iax_Sullivan2006.HOSTLIB     
+	 GENOPT(sn_ia91bg.input): GENPEAK_RV 3.1     GENRANGE_AV 0.0001 0.002     GENRANGE_RV 3.0 3.2     GENRATIO_AV0 1.0     GENSIG_AV 0.001     GENTAU_AV 1.0     HOSTLIB_WGTMAP_FILE $DES_USERS/mvincenzi/MYPIPPIN/sims_instrument/WGT_maps_SVAUR/DES_WGTMAP_MassSFR_91bg_Sullivan2006.HOSTLIB     
+	 GENOPT(sn_ii_v19_li11revised_nodust.input): DNDZ MD14 16.8E-05     GENPEAK_RV 3.1     GENRANGE_AV 0.0001 0.002     GENRANGE_RV 3.0 3.2     GENRATIO_AV0 1.0     GENSIG_AV 0.001     GENTAU_AV 1.0     HOSTLIB_WGTMAP_FILE $DES_USERS/mvincenzi/MYPIPPIN/sims_instrument/WGT_maps_SVAUR/DES_WGTMAP_Mass_TypeII.HOSTLIB     
+	 GENOPT(sn_ibc_v19_li11revised_nodust.input): DNDZ MD14 7.2E-05     GENPEAK_RV 3.1     GENRANGE_AV 0.0001 0.001     GENRANGE_RV 3.0 3.2     GENRATIO_AV0 1.0     GENSIG_AV 0.001     GENTAU_AV 1.0     HOSTLIB_WGTMAP_FILE $DES_USERS/mvincenzi/MYPIPPIN/sims_instrument/WGT_maps_SVAUR/DES_WGTMAP_Mass_TypeSE.HOSTLIB     
+  FORMAT_MASK = 48 (<built-in function format>) 
+  Compute NGENTOT= 11971 for SIMnorm_PIP_D5YR_SIM_V2_DATADESSIM_CC_NONIaMODEL0
+  Compute NGENTOT=  3083 for SIMnorm_PIP_D5YR_SIM_V2_DATADESSIM_CC_NONIaMODEL1
+  Compute NGENTOT=335192 for SIMnorm_PIP_D5YR_SIM_V2_DATADESSIM_CC_NONIaMODEL2
+  Compute NGENTOT=143654 for SIMnorm_PIP_D5YR_SIM_V2_DATADESSIM_CC_NONIaMODEL3
+
+     GENVERSION        MODEL        CIDOFF(GENVERSION)
+# -------------------------------------------------- 
+ PIP_D5YR_SIM_V2_DATA NONIa-0  [0, 14168] ... [325864, 340032]
+ PIP_D5YR_SIM_V2_DATA NONIa-1  [400000, 404391] ... [500993, 505384]
+ PIP_D5YR_SIM_V2_DATA NONIa-2  [600000, 969711] ... [9103353, 9473064]
+ PIP_D5YR_SIM_V2_DATA NONIa-3  [10000000, 10159019] ... [13657437, 13816456]
+# -------------------------------------------------- 
+  RESET_CIDOFF        = 1 
+  CIDRAN_MIN        = 0
+  CIDRAN_MAX(genver)= [13975475]
+  Sum of NGENTOT_LC = 493900 x 25 (distribute among 100 jobs)
+

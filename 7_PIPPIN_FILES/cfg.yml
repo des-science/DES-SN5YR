@@ -1,0 +1,48 @@
+QUEUE:
+  prefix: PIP
+  max_jobs: 100  # This is how many you can have concurrently running in your queue
+  max_jobs_in_queue: 200  # And this is how many you can have waiting
+  max_gpu_jobs: 10
+  max_gpu_jobs_in_queue: 50
+
+DATA_DIRS:
+  - data_files  # Relative to this file, absolute or with a variable. Add to this list with the GLOBAL: DATA_DIRS: [option in your individual config]
+
+SNANA:
+  sim_dir: $SCRATCH_SIMDIR
+  group: pi-rkessler
+
+SuperNNova:
+  conda_env: snn_gpu
+  location: $PRODUCTS/classifiers/supernnova
+
+SNIRF:
+  conda_env: snn_gpu
+  location: $PRODUCTS/classifiers/snirf
+
+DataSkimmer:
+  conda_env: snn_gpu
+  location: $PRODUCTS/utilities/dataskim
+
+SCONE:
+  init_env_cpu: source activate scone_cpu_tf2.6
+  init_env_gpu: source activate scone_gpu_tf2.6
+  location: $PRODUCTS/classifiers/scone
+
+CosmoMC:
+  location: $PRODUCTS/CosmoMC/v04/CosmoMC-master
+  static_loc: cosmomc_static_chains
+
+OUTPUT:
+  output_dir: $DES5YR/pippin_output/test
+#  output_dir: output
+  ping_frequency: 30
+  max_ping_frequency: 300
+
+SBATCH:
+  cpu_location: $SBATCH_TEMPLATES/SBATCH_DEFAULT.TEMPLATE
+  gpu_location: $SBATCH_TEMPLATES/SBATCH_gpu.TEMPLATE
+
+SETUP:
+    location: $PRODUCTS/pippin/pippin/tasks
+    #location: /project2/rkessler/SURVEYS/DES/USERS/parmstrong/dev/pippin-pa/pippin/tasks

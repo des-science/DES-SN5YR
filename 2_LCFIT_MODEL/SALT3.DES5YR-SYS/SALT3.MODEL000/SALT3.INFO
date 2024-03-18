@@ -1,0 +1,18 @@
+RESTLAMBDA_RANGE: 2800 8000
+COLORLAW_VERSION: 1
+COLORCOR_PARAMS: 2800 8000  5  -5.2893681502e-01 6.7900172346e-01 -4.3450428557e-01 1.1570172790e-01 -1.0990589690e-02
+
+COLOR_OFFSET:  0.0
+COLOR_DISP_MAX: 1.0  # avoid crazy sim-mags at high-z
+
+MAG_OFFSET:  0.27  # to get B-band mag from cosmology fit (Nov 23, 2011)
+
+SEDFLUX_INTERP_OPT: 2  # 1=>linear,    2=>spline
+ERRMAP_INTERP_OPT:  1  # 1  # 0=snake off;  1=>linear  2=>spline
+ERRMAP_KCOR_OPT:    1  # 1/0 => on/off
+
+MAGERR_FLOOR:   0.005            # don;t allow smaller error than this
+MAGERR_LAMOBS:  0.0  2000  4000  # magerr minlam maxlam
+MAGERR_LAMREST: 0.1   100   200  # magerr minlam maxlam
+
+SIGMA_INT: 0.106  # used in simulation

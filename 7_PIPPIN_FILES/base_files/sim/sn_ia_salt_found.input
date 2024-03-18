@@ -1,0 +1,74 @@
+#0;95;0c  
+########################################################
+#
+# Input file for $SNANA_DIR/bin/snlc_sim.exe
+#
+#
+#########################################################
+
+NGENTOT_LC:    500000
+GENVERSION: Foundation_simup         # SNDATA version to generate
+GENSOURCE:  RANDOM
+GENTYPE:   1
+GENMODEL:  SALT2.JLA-B14
+
+SIMLIB_FILE: $DES5YR/base/foundation/sims_ia/found_yse.simlib
+SOLID_ANGLE: 6.28
+USE_SIMLIB_PEAKMJD: 1
+
+RESTLAMBDA_FITRANGE: 3000 13000
+CIDOFF: 70000
+KCOR_FILE:  $PS1_ROOT/kcor/PS1/PS1_DS15/kcor_PS1_none.fits
+APPLY_SEARCHEFF_OPT: 3
+
+GENMAG_SMEAR_MODELNAME: G10
+# selection criteria for generation
+GENFILTERS:       gri
+
+GENSIGMA_SEARCH_PEAKMJD:  1.0         # sigma-smearing for  SEARCH_PEAKMJD (days)
+
+GENRANGE_PEAKMJD:  57000.0  57480.0
+#SOLID_ANGLE: 6.28 # 1 field, 7 sq degreees *7
+
+GENRANGE_REDSHIFT:  0.009    0.11
+GENSIGMA_REDSHIFT:  0.000001
+DNDZ: POWERLAW  2.6E-5  2.2
+GENSIGMA_VPEC: 250 #this we will need to play with this for redshift uncertainty
+GENRANGE_TREST:   -20.0    80.0     # rest epoch relative to peak (days)
+
+# GENMEAN_RV:         3.1               # mean RV to generate
+
+OPT_MWEBV: 1
+
+
+RANSEED: 128473       # random number seed
+
+# smear flags: 0=off, 1=on
+SMEARFLAG_FLUX:    1  # photo-stat smearing of signal, sky, etc ...
+SMEARFLAG_ZEROPT:  1  # smear zero-point with zptsig
+# SMEARFLAG_HOSTGAL: 0  # include host-gal noise
+
+
+SEARCHEFF_SPEC_FILE:  $DES5YR/base/foundation/sims_ia/SEARCHEFF_Found.DAT #this is the big one for now.
+APPLY_CUTWIN_OPT:     1
+CUTWIN_NEPOCH:   3 3.              # require 5 epochs (no S/N requirement)
+CUTWIN_TRESTMIN: -20  10
+CUTWIN_TRESTMAX:   9  40
+CUTWIN_MWEBV:      0 .30
+
+FORMAT_MASK:  2 # terse format
+CUTWIN_SNRMAX:   7 gri 2 -20. 80.
+CUTWIN_SNRMAX:   9.0 gri 1 -20. 80. 
+
+
+HOSTLIB_FILE: $PS1_ROOT/simlib/DS_empty.HOSTLIB
+HOSTLIB_STOREPAR: LOGMASS
+HOSTLIB_DZTOL: 0.03 0 0.
+
+# cosmological params for lightcurve generation and redshift distribution
+OMEGA_MATTER:  0.311
+OMEGA_LAMBDA:  0.689
+W0_LAMBDA:    -1.00
+H0:           70.0   
+
+SIMGEN_DUMP:  6  Z  PEAKMJD S2c S2x1 SNRMAX MAGT0_g

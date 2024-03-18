@@ -1,0 +1,475 @@
+# % include: $SNDATA_ROOT/sample_input_files/DES-SN5YR/D5yr_anchors_lcfit.yml %
+# % include: $SNDATA_ROOT/sample_input_files/DES-SN5YR/D5yr_anchors_sim.yml %
+
+#### Change the following PATH options depending on the machine/cluster you are using #####
+#### By default, everything is saved in $PIPPIN_OUTPUT
+GLOBAL:
+  OUTPUT:
+    output_dir: $DES5YR/pippin_output/test
+
+
+ALIAS:
+
+#### Change the following batch info options depending on the machine/cluster you are using #####
+  BATCHINFO: &batchinfo
+     BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 5
+  BATCHINFO20: &batchinfo20
+     BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 20
+
+
+  FOUNDKCOR: &foundkcor
+     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_Foundation.fits.gz
+  LOWZKCOR: &lowzkcor
+     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_LOWZ.fits.gz
+  DESKCOR: &deskcor
+     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_DES.fits.gz
+
+  DCR_CORRECTIONS: &dcr_corrections
+     MAGCOR_FILE: '$SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_DCR+CHROM.DAT'
+
+  BBC4D_SIGINT_COLOR: &bbc4d_sigint_color
+    opt_biascor: 4336
+    u2: 3
+    nbin_logmass: 2
+    sig1: 0.01
+
+  BBC_GENERAL: &bbc_general
+    interp_biascor_logmass: 0
+    logmass_min: -15
+    logmass_max: 35
+    ndump_nobiascor: 500
+    u5: 1 #fit for mass step
+    p5: 0.00001 # same value as sims basically
+    p8: 0.001
+    iflag_duplicate: 0
+    ndump_nobiascor: 500
+    fitflag_sigmb: 2
+    fieldGroup_biascor: X3,C3,X1+X2,S1+S2,E1+E2+C1+C2
+    p1: 0.150 # same value as sims
+    p2: 2.87
+    CUTWIN_cERR: 0 1.5
+    CUTWIN_FITPROB: 0.001 1.1
+    p9: 0.685
+    p10: 0.0
+    p11: -1.0
+    p12: 0.0    
+    surveygroup_biascor: 'CFA1+CFA2+CFA3S+CFA3K+CFA4p1+CFA4p2+CSP(zbin=0.02),FOUNDATION(zbin=0.02),DES(zbin=0.075)'
+    zmin: 0.025
+    cid_reject_file: /project2/rkessler/SURVEYS/DES/ROOT/analysis_photoIa_5yr/base/exclude_SN_zSN.txt
+
+  APPLY_CHI2MAX: &apply_chi2max
+    chi2max: 16
+
+  NO_CHI2MAX: &no_chi2max
+    chi2max: 10000000
+
+  PERFECT_CLASS: &perfect_class
+    CLASSIFIER: PerfectClassifier
+    MASK: DES5YRSIMBIAS
+    MODE: predict
+    OPTS:
+      PROB_IA: 1.0
+      PROB_CC: 0.0
+
+DATAPREP:
+  DATADES5YRSMP:  # 5 yr photometry sample
+    OPTS:
+      RAW_DIR: $SNDATA_ROOT/lcmerge/DES-SN5YR/DES-SN5YR_DES
+      TYPES:
+        IA: [1, 101]
+        NONIA: [0, 4,   5,  23,  29,  32,  33,  39,  41,  66,  80,  81, 82, 122, 129, 139, 141, 180]
+      BLIND: True # Defaults to true anyway! Set to false to unblind
+
+  DATALOWZ:  # lowz combined sample
+    OPTS:
+      RAW_DIR: $SNDATA_ROOT/lcmerge/DES-SN5YR/DES-SN5YR_LOWZ
+      TYPES:
+        IA: [1, 101]
+        NONIA: [120, 130, 20, 30]
+      BLIND: True # Defaults to true anyway! Set to false to unblind
+
+  DATAFOUND:  # Foundation sample
+    OPTS:
+      RAW_DIR: $SNDATA_ROOT/lcmerge/DES-SN5YR/DES-SN5YR_Foundation
+      TYPES:
+        IA: [1, 101]
+        NONIA: [120, 130, 20, 30]
+      BLIND: True
+
+SIM:
+  DATALOWZSIM:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_SIM_NOMINAL/1_SIM/DATALOWZSIM
+  DATAFOUNDSIM:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_SIM_NOMINAL/1_SIM/DATAFOUNDSIM
+  DATADESSIM:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_SIM_NOMINAL/1_SIM/DATADESSIM
+  DATADESCCSIM:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_SIM_NOMINAL/1_SIM/DATADESSIM_CC
+
+
+  BIASCORSIM_LOWZ:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_BIASCOR/1_SIM/BIASCORSIM_LOWZ
+  BIASCORSIM_FOUND:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_BIASCOR/1_SIM/BIASCORSIM_FOUND
+  BIASCORSIM_DES:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_BIASCOR/1_SIM/BIASCORSIM_DES
+  BIASCORSIM_DESCC:
+    EXTERNAL: $PIPPIN_OUTPUT/D5YR_BIASCOR/1_SIM/BIASCORSIM_DESCC
+
+
+LCFIT:
+  Lsys:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lowz_fordes5yr.nml
+    MASK: DATALOWZ
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *lowzkcor
+      <<: *minos_on
+    FITOPTS:
+      - $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/fitopts.yml
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      <<: *appendfitres
+      OPT_SNCID_LIST: 1
+      <<: *batchinfo
+
+  Dsys:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/desSMP_5yr.nml
+    MASK: DATADES
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *deskcor
+      FLUXERRMODEL_FILE: '$DES_ROOT/starterKits/make_fluxerr_model/OUT_SMP/FLUXERRMODEL_FAKE.DAT'
+      <<: *dcr_corrections
+      <<: *minos_on
+    FITOPTS:
+      - $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/fitopts.yml
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      OPT_SNCID_LIST: 1
+      <<: *batchinfo
+
+  Fsys:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/found_des5yr.nml
+    MASK: DATAFOUND
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *foundkcor
+      <<: *minos_on
+    FITOPTS:
+      - $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/fitopts.yml
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      OPT_SNCID_LIST: 1
+      <<: *batchinfo
+
+
+  L3:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lowz_fordes5yr.nml
+    MASK: LOWZ
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *minos_on
+      <<: *lowzkcor
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      <<: *appendfitres
+      <<: *batchinfo
+    EXTERNAL_DIRS:
+      - $PIPPIN_OUTPUT/D5YR_BIASCOR/2_LCFIT/L3_BIASCORSIM_LOWZ
+
+  F3:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/found_des5yr.nml
+    MASK: FOUND
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *minos_on
+      <<: *foundkcor
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      <<: *appendfitres
+      <<: *batchinfo
+    EXTERNAL_DIRS:
+      - $PIPPIN_OUTPUT/D5YR_BIASCOR/2_LCFIT/F3_BIASCORSIM_FOUND
+
+  D3:
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/desSMP_5yr.nml
+    MASK: DES
+    SNLCINP:
+      <<: *opt_snlcinp
+      <<: *minos_on
+      <<: *deskcor
+    FITINP:
+      <<: *opt_fitinp
+      <<: *s3fit
+    OPTS:
+      <<: *appendfitres_des
+      <<: *batchinfo
+      BATCH_MEM: 16GB
+    EXTERNAL_DIRS:
+      - $PIPPIN_OUTPUT/D5YR_BIASCOR/2_LCFIT/D3_BIASCORSIM_DES
+      - $PIPPIN_OUTPUT/D5YR_BIASCOR/2_LCFIT/D3_BIASCORSIM_DESCC
+
+CLASSIFICATION:
+#  UNITY:
+#    CLASSIFIER: PerfectClassifier
+#    MODE: predict
+#    MASK: DES
+#    OPTS:
+#      PROB_IA: 1.0
+#      PROB_CC: 1.0
+
+  SNNTESTV19_z_data:
+    CLASSIFIER: SuperNNovaClassifier
+    MODE: predict
+    GPU: False
+    MASK: DATADES
+    OPTS:
+      MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SNNTRAINV19_z_TRAINDES_V19/model.pt
+      VARIANT: vanilla # or "variational" or "bayesian". Defaults to "vanilla"
+      REDSHIFT: True  # Use redshift info when classifying. Defaults to True.
+      NORM: cosmo  # How to normalise LCs. Other options are "perfilter" or "cosmo".
+      BATCH_REPLACE:
+        REPLACE_MEM: 4GB
+        REPLACE_WALLTIME: "01:00:00"
+
+  SNNTESTJ17_z_data:
+    CLASSIFIER: SuperNNovaClassifier
+    MODE: predict
+    GPU: False
+    MASK: DATADES
+    OPTS:
+      MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SNNTRAINJ17_z_TRAINDES_J17/model.pt
+      VARIANT: vanilla # or "variational" or "bayesian". Defaults to "vanilla"
+      REDSHIFT: True  # Use redshift info when classifying. Defaults to True.
+      NORM: cosmo  # How to normalise LCs. Other options are "perfilter" or "cosmo".
+      BATCH_REPLACE:
+        REPLACE_MEM: 4GB
+        REPLACE_WALLTIME: "01:00:00"
+
+  SNNTESTDESCC_z_data:
+    CLASSIFIER: SuperNNovaClassifier
+    MODE: predict
+    GPU: False
+    MASK: DATADES
+    OPTS:
+      MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SNNTRAINDESCC_z_TRAINDES_DESCC/model.pt
+      VARIANT: vanilla # or "variational" or "bayesian". Defaults to "vanilla"
+      REDSHIFT: True  # Use redshift info when classifying. Defaults to True.
+      NORM: cosmo  # How to normalise LCs. Other options are "perfilter" or "cosmo".
+      BATCH_REPLACE:
+        REPLACE_MEM: 4GB
+        REPLACE_WALLTIME: "01:00:00"
+ 
+  SCONETESTV19_z_data:
+    CLASSIFIER: SconeClassifier
+    MODE: predict
+    MASK: DATADES
+    GPU: False # --> set this to True if your testing sample is LARGE (e.g. if your testing sample is a BiasCor simulation)
+    OPTS:
+      TRAINED_MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SCONEV19
+      MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SCONEV19
+      BATCH_REPLACE:
+        REPLACE_MEM: 20GB
+        REPLACE_WALLTIME: "01:00:00"
+
+  SNIRFTESTV19_data:
+    CLASSIFIER: SnirfClassifier
+    MODE: predict
+    MASK: DATADES
+    OPTS:
+      MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SNIRFTRAIN_V19_T_TRAINDES_V19/model.pkl
+
+# Running the perfect classifier on BiasCor simulations (purely Ia) and pretend this is the same SNN/SCONE/SNIRF classifier that was run on data.
+# Classification is not used/applied to BiasCor simulations in our analysis, so we can use this trick and avoid classifing large simulations (very time consuming)
+ 
+  SCONETESTV19_z:
+    MASK: BIASCORSIM_DES
+    <<: *perfect_class
+
+  SNIRFTRAIN_V19:
+    MASK: BIASCORSIM_DES
+    <<: *perfect_class
+
+  SNNTESTV19_z:
+    MASK: BIASCORSIM_DES
+    <<: *perfect_class
+
+  SNNTESTJ17_z:
+    MASK: BIASCORSIM_DES
+    <<: *perfect_class
+
+  SNNTESTDESCC_z:
+    MASK: BIASCORSIM_DES  
+    <<: *perfect_class
+
+AGGREGATION:
+  AGG:
+    MERGE_CLASSIFIERS:
+      PROB_SNNV19: [SNNTESTV19_z_data, SNNTESTV19_z]  # rename everything, classification for BiasCor simulations is actually fake (perfect classifier is used)
+      PROB_SNNJ17: [SNNTESTJ17_z_data, SNNTESTJ17_z]
+      PROB_SNNDESCC: [SNNTESTDESCC_z_data , SNNTESTDESCC_z]
+      PROB_SNIRFV19: [SNIRFTESTV19_data, SNIRFTRAIN_V19]
+      PROB_SCONE: [SCONETESTV19_z_data, SCONETESTV19_z]
+
+MERGE:
+  MERGE:
+
+BIASCOR:
+  NOMINAL:
+    BASE: $DES5YR/base/SALT2mu_5yr.input
+    DATA: [ Lsys_DATALOWZ, Dsys_DATADES5YRSMP, Fsys_DATAFOUND]
+    SIMFILE_BIASCOR: [L3_BIASCORSIM_LOWZ, D3_BIASCORSIM_DES, F3_BIASCORSIM_FOUND]
+    SIMFILE_CCPRIOR: D3_BIASCORSIM_DESCC
+    CLASSIFIER: PROB_SNNV19
+    CONSISTENT_SAMPLE: True
+    MUOPTS:
+      MASSSTEPLOC:  # change location of the mass step
+        OPTS:
+          p7: 10.2
+          <<: *no_chi2max
+      ALPHAEVOL:  # allow redshift dependent evolution of alpha
+        OPTS:
+          u3: 1
+          <<: *no_chi2max
+      BETAEVOL:  # allow redshift dependent evolution of beta
+        OPTS:
+          u4: 1
+          <<: *no_chi2max
+      GAMMAEVOL:  # allow redshift dependent evolution of gamma
+        OPTS:
+          u6: 1
+          <<: *no_chi2max
+      CC_SNNDESCC:  # use probabilities determined using SNN trained on DES-CC templates
+        CLASSIFIER: PROB_SNNDESCC
+        OPTS:
+          <<: *no_chi2max
+      CC_SNNJ17:  # use probabilities determined using SNN trained on Jones2017 templates
+        CLASSIFIER: PROB_SNNJ17
+        OPTS:
+          <<: *no_chi2max
+      CC_SNIRF:  # use probabilities determined using SNIRF trained on Vincenzi2019 templates
+        CLASSIFIER: PROB_SNIRFV19
+        OPTS:
+          <<: *no_chi2max
+      CC_SCONE:  # use probabilities determined using SCONE trained on Vincenzi2019 templates
+        CLASSIFIER: PROB_SCONE
+        OPTS:
+          <<: *no_chi2max
+      CC_PRIOR_H11:  # use polynomial function for Core collapse prior (as in Holzek et al 2012)
+        CLASSIFIER: PROB_SNNV19
+        OPTS:
+          simfile_ccprior: H11
+          u17: 1
+          u20: 1
+          <<: *no_chi2max
+    OPTS:
+      <<: *batchinfo20
+      BATCH_MEM: 32000
+      <<: *bbc4d_sigint_color
+      <<: *bbc_general
+      <<: *apply_chi2max
+
+
+  NOMINALSIM:
+    BASE: $DES5YR/base/SALT2mu_5yr.input
+    DATA: [ Lsys_DATALOWZSIM, Dsys_DATADESSIM, Dsys_DATADESCCSIM, Fsys_DATAFOUNDSIM ]
+    SIMFILE_BIASCOR: [L3_BIASCORSIM_LOWZ, D3_BIASCORSIM_DES, F3_BIASCORSIM_FOUND]
+    SIMFILE_CCPRIOR: D3_BIASCORSIM_DESCC
+    CLASSIFIER: PROB_SNNV19
+    CONSISTENT_SAMPLE: True
+    MUOPTS:
+      MASSSTEPLOC:
+        OPTS:
+          p7: 10.2
+          <<: *no_chi2max
+      ALPHAEVOL:
+        OPTS:
+          u3: 1
+          <<: *no_chi2max
+      BETAEVOL:
+        OPTS:
+          u4: 1
+          <<: *no_chi2max
+      GAMMAEVOL:
+        OPTS:
+          u6: 1
+          <<: *no_chi2max
+      CC_SNNDESCC:
+        CLASSIFIER: PROB_SNNDESCC
+        OPTS:
+          <<: *no_chi2max
+      CC_SNNJ17:
+        CLASSIFIER: PROB_SNNJ17
+        OPTS:
+          <<: *no_chi2max
+      CC_SNIRF:
+        CLASSIFIER: PROB_SNIRFV19
+        OPTS:
+          <<: *no_chi2max
+      CC_SCONE: 
+        CLASSIFIER: PROB_SCONE
+        OPTS:
+          <<: *no_chi2max
+      CC_PRIOR_H11:
+        CLASSIFIER: PROB_SNNV19
+        OPTS:
+          simfile_ccprior: H11
+          u17: 1
+          u20: 1
+          <<: *no_chi2max
+    OPTS:
+      <<: *batchinfo20
+      BATCH_MEM: 32000
+      <<: *bbc4d_sigint_color
+      <<: *bbc_general
+      <<: *apply_chi2max
+
+CREATE_COV:
+  COV_SYST:
+    MASK: NOMINAL
+    OPTS:
+      <<: *batchinfo
+      SUBTRACT_VPEC: False
+      BINNED: False
+      COVOPTS:
+        - "[NOSYS] [=DEFAULT,=DEFAULT]"
+        - "[MWEBV] [=MWEBV,=DEFAULT]"
+        - "[CAL_SALT2] [+cal,=DEFAULT]"
+        - "[CALSPEC] [=CALSPEC,=DEFAULT]"
+        - "[ZSHIFT] [=zshift,=DEFAULT]"
+        - "[MASSLOC] [=DEFAULT,+MASS]"
+        - "[ALPHAEVOL] [=DEFAULT,=ALPHAEVOL]"
+        - "[BETAEVOL] [=DEFAULT,=BETAEVOL]"
+        - "[GAMMAEVOL] [=DEFAULT,=GAMMAEVOL]"
+        - "[SNN] [=DEFAULT,+CC_SNN]"
+        - "[SNIRF] [=DEFAULT,=CC_SNIRF]"
+        - "[SCONE] [=DEFAULT,=CC_SCONE]"
+        - "[CCPRIOR_H11] [=DEFAULT,=CC_PRIOR_H11]"
+        - "[COLORLAW] [=COLORLAW,=DEFAULT]"
+
+COSMOFIT:
+  WFIT:
+    SN_NOPRIOR_OMW:
+      MASK: COV
+      OPTS:
+        <<: *batchinfo20
+        WFITOPTS:
+          - /omw_nopri/ -wsteps 501 -ommin 0.0 -ommax 1.0 -omsteps 501 -speed_flag_chi2 2 -ompri 0.315 -dompri 10
+
+    SN_CMB_OMW:  # CMB prior as in Planck et al 2020
+      MASK: COV
+      OPTS:
+        <<: *batchinfo20
+        WFITOPTS:
+          - /cmb18_pri/ -cmb_sim -sigma_Rcmb 0.0057 -speed_flag_chi2 2 -wsteps 801 -ommin 0.2 -ommax 0.4 -omsteps 501

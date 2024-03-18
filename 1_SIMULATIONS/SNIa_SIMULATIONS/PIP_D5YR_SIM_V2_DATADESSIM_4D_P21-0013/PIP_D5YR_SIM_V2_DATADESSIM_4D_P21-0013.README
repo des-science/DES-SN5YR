@@ -1,0 +1,92 @@
+DOCUMENTATION:
+  GENVERSION: PIP_D5YR_SIM_V2_DATADESSIM_4D_P21-0013 
+
+#                   NLC_GEN   NLC_WRITE  NSPEC_WRITE  CPU(minutes)
+  STAT_SUMMARY: 
+  - TOTAL             26518       2843         0        1.8
+
+  INPUT_FILES:
+  - MASTER    PIP_D5YR_SIM_V2_DATADESSIM_4D_P21.input 
+  - SNIa      sn_ia_salt_des5yr.input 
+
+  SUBMIT_DIR:  /scratch/midway2/rkessler/PIPPIN_OUTPUT/D5YR_SIM_V2/1_SIM/DATADESSIM_4D_P21
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+  INPUT_KEYS_SNIaMODEL0: 
+# Output data
+    FORMAT_MASK:             48  #  += 2,32,16 -> TEXT, FITS, randomCID
+    GENTYPE:                 1  # true type
+    SNTYPE:                  1  101  # spec Type, photID type
+# Source model
+    GENMODEL:                /project2/rkessler/SURVEYS/DES/ROOT/SALT3training/OUT_TRAIN_SALT3_systCovar_unoU/SALT3.MODEL000 
+    GENMODEL_EXTRAP_LATETIME: $PLASTICC_MODELS/SNIa_Extrap_LateTime_2expon.TEXT 
+    UVLAM_EXTRAPFLUX:        500 
+    GENPDF_FILE:             /project2/rkessler/SURVEYS/DES/ROOT/analysis_photoIa_5yr/populations/FINAL_forDES5yr/DES5YR_S3P21pLDec2022_GENPDF.DAT 
+    GENPDF_OPTMASK:          1 
+    GENMAG_OFF_GLOBAL:       -0.1200  
+    GENMAG_OFF_GLOBAL:       -0.12 
+    GENMAG_SMEAR_ADDPHASECOR: 0.0 10.0 
+    GENMAG_SMEAR_MODELNAME:  C11 
+    GENMAG_SMEAR_SCALE:      0.0001 
+    GENMAG_SMEAR_SCALE(c):   0,0 
+# Cosmology inputs
+    OMEGA_MATTER:            0.3150  
+    OMEGA_LAMBDA:            0.6850  
+    w0_LAMBDA:               -1.0000  
+    wa_LAMBDA:               0  
+    MUSHIFT:                 0  
+    LENSING_PROBMAP_FILE:    $SNDATA_ROOT/models/lensing/LENSING_PROBMAP_LogNormal+MICECATv1.DAT 
+# Instrumental inputs
+    GENFILTERS:          griz 
+    KCOR_FILE:           /project2/rkessler/SURVEYS/PS1MD/USERS/dscolnic/PANTHEON+/kcor/v6_1/kcor_DES_5yr_v6_1.fits 
+    SIMLIB_FILE:             $DES_ROOT/simlibs/DES_DIFFIMG.SIMLIB 
+    SMEARFLAG_FLUX:      1  # 1->add Poisson noise
+    SMEARFLAG_ZEROPT:    3  # +=1->apply scatter, +=2->add to FLUXERRCAL
+    FLUXERRMODEL_FILE:       /project2/rkessler/SURVEYS/DES/ROOT/starterKits/make_fluxerr_model/OUT_SMP/FLUXERRMODEL_SIM.DAT 
+# HOSTLIB inputs
+    HOSTLIB_FILE:            /project2/rkessler/SURVEYS/DES/USERS/mvincenzi/MYPIPPIN/sims_instrument/auto_sullivan_params.HOSTLIB 
+    HOSTLIB_GENRANGE_NSIGZ:  -3. +3. 
+    HOSTLIB_MSKOPT:          258 
+    HOSTLIB_SCALE_PROPERTY_ERR: 0.0(LOGMASS),0.0(LOGSFR),0.0(LOGsSFR),0.0(COLOR) 
+    HOSTLIB_WGTMAP_FILE:     /project2/rkessler/SURVEYS/DES/USERS/mvincenzi/MYPIPPIN/sims_instrument/WGT_maps_DESX3/DES_WGTMAP_MassSFR_Wiseman2021.HOSTLIB 
+# SEARCHEFF/detections
+    SEARCHEFF_PIPELINE_LOGIC_FILE:  $SNDATA_ROOT/models/searcheff/SEARCHEFF_PIPELINE_LOGIC.DAT
+    NEWMJD_DIF:              0.4000  # day-sep if > 1 detections required
+    SEARCHEFF_PIPELINE_EFF_FILE:  $SNDATA_ROOT/models/searcheff/SEARCHEFF_PIPELINE_DES.DAT
+    SEARCHEFF_SPEC_FILE:     ZERO
+    SEARCHEFF_zHOST_FILE:    /project2/rkessler/SURVEYS/DES/USERS/mvincenzi/MYPIPPIN/sims_instrument/MV_HOSTeff_perField_perYear_obsgr_HQ.dat
+    APPLY_SEARCHEFF_OPT:     5  # += 1,2,4 => pipe,spec,zhost
+# Redshift inputs
+    GENRANGE_REDSHIFT:       0.0500  1.3000  
+    GENSIGMA_REDSHIFT:       1.0000e-05  
+    GENSIGMA_VPEC:           300.0000  # true vpec scatter (km/sec)
+    VPEC_ERR:                300.0000  # vpec error after correction (km/sec)
+# Epoch & sky coverage inputs
+    GENRANGE_PEAKMJD:        56535.0000  58178.0000  
+    GENRANGE_TREST:          -40.0000  100.0000  
+    SOLID_ANGLE:             8.2000e-03  
+# Galactic extinction
+    OPT_MWEBV:               3 
+    OPT_MWCOLORLAW:          99 
+    RV_MWCOLORLAW:           3.1 
+# Population and rate-model params
+    GENPDF_FILE:  /project2/rkessler/SURVEYS/DES/ROOT/analysis_photoIa_5yr/populations/FINAL_forDES5yr/DES5YR_S3P21pLDec2022_GENPDF.DAT 
+    GENPEAK_SALT2ALPHA:      0.1500  
+    GENSIGMA_SALT2ALPHA:     0  0  
+    GENRANGE_SALT2ALPHA:     1.0000e-03  0.4000  
+    DNDZ:                    POWERLAW 2.27E-5 1.7 
+# Misc inputs
+    GENSOURCE:               RANDOM
+    PATH_USER_INPUT:         /scratch/midway2/rkessler/PIPPIN_OUTPUT/D5YR_SIM_V2/1_SIM/DATADESSIM_4D_P21
+    PATH_SNDATA_SIM:         /scratch/midway2/rkessler/SNDATA_ROOT/SIM
+    RANSEED:                 213849  
+    DEBUG_FLAG:              0  
+    SIMGEN_DUMP:             37 CID GENTYPE SNTYPE NON1A_INDEX GENZ GALZTRUE LIBID RA DEC MWEBV MU PEAKMJD PEAKMAG_g PEAKMAG_r PEAKMAG_i PEAKMAG_z SNRMAX_g SNRMAX_r SNRMAX_i SNRMAX_z SNRMAX SNRMAX2 SNRMAX3 NOBS TRESTMIN TRESTMAX TGAPMAX CUTMASK SIM_EFFMASK HOSTMAG_g HOSTMAG_r HOSTMAG_i HOSTMAG_z SBF# CUTWIN inputs
+# CUTWIN inputs
+    APPLY_CUTWIN_OPT:        1  
+    CUTWIN_NEPOCH:           5 -5. 
+    CUTWIN_SNRMAX:           3 griz 2 -20. 60. 
+    CUTWIN_MWEBV:            0 0.30 
+# 
+DOCUMENTATION_END:

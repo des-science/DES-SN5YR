@@ -1,0 +1,87 @@
+DOCUMENTATION:
+    PURPOSE: Generate Baseline Core collapse simulations
+    INTENT:   Test
+    USAGE_KEY:  SIMLIB_FILE
+    USAGE_CODE: snlc_sim.exe
+    VALIDATE_SCIENCE: match DES sample as shown in Vincenzi et al. 2020 (in prep.)
+    NOTES:
+      - TEMPLATES: presented in Vincenzi et al. 2019 (arXiv:1908.05228)
+      - TEMPLATES: used here has NOT been corrected for host extinction, only for MW reddening
+      - LUMINOSITY FUNCTION: templates matched to REVISED LF from Li. et al 2010 (arXiv:1006.4612, for details see Vincenzi et al. 2019)
+      - RELATIVE RATES: from Shivvars et al. 2017 (also reported in Vincenzi et al. 2019)
+      - HOST DUST EXTINCTION: not applied (we use templates that has NOT been corrected for dust, so dust is included in templates already)
+    VERSIONS:
+    - DATE:  2020-07
+      AUTHORS: M. Vincenzi
+DOCUMENTATION_END:
+# -----------------------------------------
+# TEMPLATES: presented in Vincenzi et al. 2019 (arXiv:1908.05228)
+# TEMPLATES: used here has NOT been corrected for host extinction, only for MW reddening
+#
+# LUMINOSITY FUNCTION: templates matched to REVISED LF from Li. et al 2010 (arXiv:1006.4612, for details see Vincenzi et al. 2019) 
+# RELATIVE RATES: from Shivvars et al. 2017 (also reported in Vincenzi et al. 2019)
+# HOST DUST EXTINCTION: not applied (we use templates that has NOT been corrected for dust, so dust is included in templates already)
+#
+# II    --> 25 (IIP+IIL, no distinction)
+# IIP   --> 20
+# IIn   --> 21
+# IIL   --> 22
+# IIb   --> 23
+# Ib    --> 32
+# Ic    --> 33
+# Ic-BL --> 35
+
+INPUT_FILE_INCLUDE: $DES5YR/base/des/sims_instrument/sim_des_5yr_phot_include.input
+
+GENTYPE:  20
+# GENSOURCE: RANDOM
+GENMODEL: $SNDATA_ROOT/models/NON1ASED/NON1ASED.V19_CC_noHostXT
+
+DNDZ: MD14 2.4E-05
+GENRANGE_AV: 0.0001 0.002
+GENTAU_AV: 1.0
+GENSIG_AV: 0.001
+GENRATIO_AV0: 1.
+GENPEAK_RV: 3.1
+GENRANGE_RV: 3.0 3.2
+
+NON1A_KEYS: 5
+         INDEX   WGT    MAGOFF   MAGSMEAR  SNTYPE
+NON1A:          830  0.009919   -0.10      1.15    23    ## IIb    SN2008ax
+NON1A:          829  0.009919   -0.10      1.15    23    ## IIb    SN2008aq
+NON1A:          822  0.009919   -0.10      1.15    23    ## IIb     SN2006T
+NON1A:          847  0.009919   -0.10      1.15    23    ## IIb    SN2011dh
+NON1A:          865  0.009919   -0.10      1.15    23    ## IIb   SN2016gkg
+NON1A:          849  0.009919   -0.10      1.15    23    ## IIb    SN2011fu
+NON1A:          850  0.009919   -0.10      1.15    23    ## IIb    SN2011hs
+NON1A:          848  0.009919   -0.10      1.15    23    ## IIb    SN2011ei
+NON1A:          832  0.009919   -0.10      1.15    23    ## IIb    SN2008bo
+NON1A:          859  0.009919   -0.10      1.15    23    ## IIb    SN2013df
+NON1A:          804  0.009919   -2.40      1.15    23    ## IIb     SN1993J
+NON1A:          833  0.008316    1.22      1.12    32     ## Ib     SN2008D
+NON1A:          807  0.008316    1.22      1.12    32     ## Ib    SN1999dn
+NON1A:          854  0.008316    1.22      1.12    32     ## Ib    SN2012au
+NON1A:          813  0.008316    1.22      1.12    32     ## Ib    SN2004gq
+NON1A:          815  0.008316    1.22      1.12    32     ## Ib    SN2004gv
+NON1A:          816  0.008316    1.22      1.12    32     ## Ib    SN2005bf
+NON1A:          803  0.008316    1.22      1.12    32     ## Ib   iPTF13bvn
+NON1A:          827  0.008316    1.22      1.12    32     ## Ib    SN2007uy
+NON1A:          821  0.008316    1.22      1.12    32     ## Ib    SN2006ep
+NON1A:          842  0.008316    1.22      1.12    32     ## Ib    SN2009jf
+NON1A:          841  0.008316    1.22      1.12    32     ## Ib    SN2009iz
+NON1A:          828  0.008316    1.22      1.12    32     ## Ib     SN2007Y
+NON1A:          818  0.008316    1.22      1.12    32     ## Ib    SN2005hg
+NON1A:          846  0.010725   -2.99      0.78    33     ## Ic    SN2011bm
+NON1A:          805  0.010725    0.46      0.78    33     ## Ic     SN1994I
+NON1A:          862  0.010725    0.46      0.78    33     ## Ic    SN2013ge
+NON1A:          823  0.010725    0.46      0.78    33     ## Ic    SN2007gr
+NON1A:          814  0.010725    0.46      0.78    33     ## Ic    SN2004gt
+NON1A:          812  0.010725    0.46      0.78    33     ## Ic    SN2004fe
+NON1A:          810  0.010725    0.46      0.78    33     ## Ic    SN2004aw
+NON1A:          826  0.001835    1.01      0.78    35  ## Ic-BL    SN2007ru
+NON1A:          806  0.001835    1.01      0.78    35  ## Ic-BL    SN1998bw
+NON1A:          853  0.001835    0.46      0.78    35  ## Ic-BL    SN2012ap
+NON1A:          836  0.001835    1.01      0.78    35  ## Ic-BL    SN2009bb
+NON1A:          820  0.001835    0.46      0.78    35  ## Ic-BL    SN2006aj
+NON1A:          809  0.001835    0.46      0.78    35  ## Ic-BL    SN2002ap
+

@@ -1,0 +1,70 @@
+CONFIG:
+  BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 20
+  VERSION:
+  OUTDIR:
+
+#END_YAML
+
+
+&SNLCINP
+    USE_MINOS = F ! Set to T for final analysis
+
+    PRIVATE_DATA_PATH = '$SNDATA_ROOT/lcmerge/DES-SN5YR'
+    VERSION_PHOTOMETRY = 'DES5YR_LOWZ_COMBINED_FITS'
+
+    PHOTFLAG_MSKREJ   = 0, 0
+    SNTABLE_LIST      = 'FITRES'
+    TEXTFILE_PREFIX   = 'DES5YR_DES_CHANGEME'
+
+    KCOR_FILE        = '$DES_ROOT/kcor/DES5YR_LOWZ_COMBINED/kcor_DES5YR_LOWZ_COMBINED.fits'
+    FLUXERRMODEL_FILE = ''  ! No error fudge map
+
+    !  Need to add 0.02 mag fudge option
+    ! Changed this to new filter convension in DES5YR_LOWZ_COMBINED --> previous FUDGE_MAG_ERROR = 'u 0.01 v 0.01 w 0.01 x 0.01 y 0.01 z 0.01 A 0.01'
+    FUDGE_MAG_ERROR = 'e 0.01 g 0.01 h 0.01 i 0.01 b 0.01 c 0.01 d 0.01'
+
+    NFIT_ITERATION = 3
+    INTERP_OPT     = 1
+
+    SNCID_LIST  = 0
+    SNTYPE_LIST = 0      ! 0 = all
+
+    OPT_MWEBV    = 3       ! 3=Schafly2011 update, 2=SFD98, 1=FileDefined
+    OPT_MWCOLORLAW  = 99   ! Fitzpatrick99
+    OPT_SETPKMJD = 20      ! 16=fmax clump, 4=no abort
+
+    ABORT_ON_NOEPOCHS = F
+    ABORT_ON_TRESTCUT = F
+    ABORT_ON_DUPLCID  = F
+
+    CUTWIN_MJD   = 20000, 99999
+    CUTWIN_NEPOCH    =  5
+    CUTWIN_REDSHIFT  =  0.01, 0.1
+    CUTWIN_REDSHIFT_ERR   =  0.0, 0.01
+    CUTWIN_TREST      = -20.0,   60.0
+    ! CUTWIN_TRESTMIN   = -200.0,   10.0
+    ! CUTWIN_TRESTMAX   = 5, 99
+    CUTWIN_TRESTRANGE = 10, 999  ! TrestMax - TrestMin
+    CUTWIN_MWEBV      = 0.0 0.25  !?? To be revisited
+
+    CUTWIN_SNRMAX       =  5.0, 1.0E8
+    CUTWIN_NFILT_SNRMAX =  2.0, 99.
+
+    ! SNCID_IGNORE_FILE = '$DES3YR/config/35sigignore.list'
+
+&END
+
+&FITINP
+    FITMODEL_NAME  = 'SALT2.JLA-B14'
+    FILTLIST_FIT = 'bcdefghijklmnoqrstvwxyABCDEFGH' !removed a,p,z,u corresponding to U and u, Maria and Dillon Oct 22 
+
+    FUDGEALL_ITER1_MAXFRAC = 0.01  ! To be replaced with FUDGEMAGERROR
+    PRIOR_MJDSIG        = 10
+    PRIOR_SHAPE_RANGE = -4.0, 4.0
+
+    FITWIN_SHAPE     = -5.00, +5.00
+    FITWIN_COLOR     = -0.50, +0.50
+    FITWIN_PROB      =  0.01,  1.01
+    FITWIN_TREST     = -15.0, 45.0
+    DELCHI2_REJECT   = 10
+&END

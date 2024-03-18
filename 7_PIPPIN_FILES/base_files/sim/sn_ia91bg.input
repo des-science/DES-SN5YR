@@ -1,0 +1,37 @@
+INPUT_FILE_INCLUDE: surveys/des/sims_instrument/sim_des_5yr_phot_include.input
+
+GENTYPE:  91
+## M. Vincenzi updated this on Dec 2021 to match Vincenzi et al. 2020 and to use the
+## new binary files created using make_simsed_binaries.py
+GENMODEL: $PLASTICC_ROOT/model_libs_updates/SIMSED.SNIa-91bg
+
+SIMSED_USE_BINARY:   1
+SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+
+# Volumetric rate
+
+DNDZ:  POWERLAW 3.0E-6 1.5   # 3E-6/yr/Mpc^3 x (1+z)^1.5
+
+GENRANGE_AV: 0.0001 0.002
+GENTAU_AV: 1.0
+GENSIG_AV: 0.001
+GENRATIO_AV0: 1.
+GENPEAK_RV: 3.1
+GENRANGE_RV: 3.0 3.2
+# ==============================
+
+# var(stretch)   =  0.096^2
+# var(color)     =  0.175^2
+# reduced covar  = -0.656
+
+SIMSED_PARAM:  stretch
+GENPEAK_stretch:   0.975
+GENSIGMA_stretch:  0.096 0.096
+GENRANGE_stretch:  0.65  1.25
+
+SIMSED_PARAM:  color
+GENPEAK_color:   0.557
+GENSIGMA_color:  0.175 0.175
+GENRANGE_color:  0.0 1.0
+
+SIMSED_REDCOR(stretch,color):  -0.656

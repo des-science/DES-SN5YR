@@ -1,0 +1,23 @@
+DOCUMENTATION:
+  PURPOSE:  SALT3 models with "fragilistic" calibration systematics (for DES-SN5YR analysis)
+  REF: 
+  - AUTHOR: D. Kenworthy et al, 2021 (K21: SALT3 training of SNIa)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2021ApJ...923..265K
+  - AUTHOR: D. Brout et al, 2021 (B21: fragilistic re-calibration)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2022ApJ...938..111B
+  - AUTHOR: M.Vincenzi et al., 2023 (V23: DES-SN5YR analysis)
+    ADS:    TBD
+
+  USAGE_KEY:  VERSION_PHOTOMETRY
+  USAGE_CODE: snlc_fit.exe (and also SNcosmo)
+  NOTES:
+  - each SALT3.MODELnnn includes random calibration shifts with their correlations; see /calib_shiftlists
+  - For more explanation, see Sec XYZ in V23
+  - For MAGSHIFT CSP-u, multuply by x4 so that sigma(CSP-u) = 0.005 -> 0.02.
+    Note that sigma(CSP-BVri) ~ 0.01 from SuperCal, and sigma(CFA3) = 0.02.
+    This increase in sigma(CSP-u)  makes it consistent with other UV band uncertainties.
+  VERSIONS:
+  - DATE: 2023-12
+    AUTHORS:  R.Kessler, M.Vincenzi
+
+DOCUMENTATION_END:
