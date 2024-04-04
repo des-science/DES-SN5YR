@@ -1,5 +1,5 @@
 # DES-SN5YR_DataRelease
-Data Release for the DES Supernova 5yr Cosmological analysis. Extra documentation and tutorials available at https://desdrtest.readthedocs.io/en/main/
+Data Release for the DES Supernova 5yr Cosmological analysis. Extra documentation and tutorials will be available soon at the "readthedoc" associated page.
 
 ### Summary and Overview of this Github folder
 
