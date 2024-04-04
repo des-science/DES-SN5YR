@@ -1,5 +1,9 @@
 ### Hubble diagrams
-We provide two Hubble diagrams, one including only the essential information for cosmology (DES-SN5YR_HD.csv) and one including additional metadata (DES-SN5YR_HD+MetaData.csv)
+We provide two Hubble diagrams, one including only the essential information for cosmology (DES-SN5YR_HD.csv) and one including additional metadata (DES-SN5YR_HD+MetaData.csv). 
+
+Using the metadata, SN distances are calculated as:
+
+`MU` $`=`$ -2.5log$`_{10}`$(x0) $`~+~\alpha`$x1 $`~-~\beta`$c$`~\pm~\gamma/2~-~`$biasCor_mu$`~-~M_{0~\mathrm{avg}}`$
 
 **DES-SN5YR_HD.csv**
 
@@ -35,7 +39,7 @@ We provide two Hubble diagrams, one including only the essential information for
 - `x1ERR` - SALT2 stretch uncertainty
 - `mB` - SALT2 uncorrected brightness
 - `mBERR` - SALT2 uncorrected brightness uncertainty
-- `x0` - SALT2 light curve amplitude
+- `x0` - SALT2 light curve amplitude where $m_x = -2.5\mathrm{log}_{10}(x0)$ used in the modified Tripp equation
 - `x0ERR` - SALT2 light curve amplitude uncertainty
 - `COV_x1_c` - SALT2 fit covariance between x1 and c
 - `COV_x1_x0` - SALT2 fit covariance between x1 and x0
@@ -58,6 +62,15 @@ We provide two Hubble diagrams, one including only the essential information for
 - `biasCorErr_mu`  - Uncertainty on bias correction applied to brightness m_b
 - `biasCor_mu_COVSCALE` - Reduction in uncertainty due to selection effects (multiplicative)
 - `biasCor_mu_COVADD`  - Uncertainty floor as given by the intrinsic scatter model (quadriture)
+
+### Global Parameters ###
+- $\alpha =  0.16087 \pm 0.00152$ 
+- $\beta = 3.11780 \pm 0.03530$
+- $\gamma = 0.03754 \pm 0.00798$
+- $M_{0~\mathrm{avg}} = -29.95821$
+
+Note, these global parameters are determined from the likelihood analysis of all the SNe on the Hubble diagram.
+
 
 ### Statistical and Stat+Systematic Covariance matrices
 The Statistical and Stat+Systematic Covariance matrices (both 1829x1829 Matrix) are provided in
