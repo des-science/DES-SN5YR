@@ -11,7 +11,9 @@ The full set of light curves will be released with Sanchez et al. 2024 (in Colla
 This folder includes the 25 DES mocks used for testing and validating the DES cosmological pipeline. We provide both simulated Ia and non-Ia DES light curves. Please take a look at the folder for further details.
 
 **2_LCFIT_MODEL**:
-This folder contains the SALT3 fitting models used (1) for our nominal analysis (SALT3.DES5YR) and (2) to incorporate SALT3-related systematics in our uncertainties (SALT3.DES5YR-SYS).
+This folder contains the SALT3 fitting models used 
+- (1) for our nominal analysis (SALT3.DES5YR)
+- (2) to incorporate SALT3-related systematics in our uncertainties (SALT3.DES5YR-SYS).
 
 **3_CLASSIFICATION**:
 The file contains classification probabilities for the 1635 DES SNe used in the DES-SN5YR cosmological analysis (see folder for info on the different classification algorithms used). 
