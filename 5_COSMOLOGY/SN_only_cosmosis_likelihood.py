@@ -1,5 +1,5 @@
 """
-The likelihood module for Pantheon+ SNe combined with SH0ES Cepheids
+The likelihood module for DES-SN5YR
 
 """
 
@@ -8,12 +8,6 @@ from cosmosis.datablock import names
 import os
 import numpy as np
 import pandas as pd
-
-# Default is to use SN data from https://arxiv.org/abs/2202.04077
-# and Cepheids data from https://arxiv.org/abs/2112.04510
-default_data_file = os.path.join(os.path.split(__file__)[0], "Pantheon+SH0ES.dat")
-default_covmat_file = os.path.join(os.path.split(__file__)[0], "Pantheon+SH0ES_STAT+SYS.cov")
-
 
 class PantheonLikelihood(GaussianLikelihood):
     x_section = names.distances
@@ -40,7 +34,7 @@ class PantheonLikelihood(GaussianLikelihood):
         self.zCMB = data['zHD'][self.ww] #use the vpec corrected redshift for zCMB 
         self.zHEL = data['zHEL'][self.ww]
         self.m_obs = data['MU'][self.ww]
-        self.m_obs_err = data['MUERR'][self.ww]
+        self.m_obs_err = data['MUERR_FINAL'][self.ww]
 
         return self.zCMB, self.m_obs 
 
@@ -71,7 +65,7 @@ class PantheonLikelihood(GaussianLikelihood):
                 if self.ww[j]:
                     jj += 1
                 val = float(f.readline())
-                #if (i == j): val += self.m_obs_err[i]**2 #added to make sure we have stat error on diagonal 10/26/22
+                #if (i == j): val += self.m_obs_err[i]**2  #added to make sure we have stat error on diagonal
                 if self.ww[i]:
                     if self.ww[j]:
                         C[ii,jj] = val
@@ -88,8 +82,8 @@ class PantheonLikelihood(GaussianLikelihood):
     def extract_theory_points(self, block):
         """
         Run once per parameter set to extract the mean vector that our
-        data points are compared to.  For the Hubble flow set, we compare to the 
-        cosmological model. For the calibrators we compare to the Cepheid distances.
+        data points are compared to.  Then compare data points to the 
+        cosmological model.
         """
         import scipy.interpolate
 
