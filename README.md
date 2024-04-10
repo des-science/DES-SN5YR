@@ -25,5 +25,8 @@ This folder contains all the files to fully reproduce the cosmological contours 
 - STAT+SYST covariance matrix.
 - Single systematic covariance matrices (see README therein).
 
+**5_COSMOLOGY**:
+SN likelihood and chains for the different cosmological models and data used in the [DES Collaboration (2024)](https://arxiv.org/abs/2401.02929) paper.
+
 **7_PIPPIN_FILES**:
 This folder includes the pippin input files needed to reproduce DES simulations and cosmological analysis.
