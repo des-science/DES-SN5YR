@@ -1,9 +1,10 @@
 ## SN likelihood and chains
 
-#### Likelihood `SN_only_cosmosis_likelihood.py` as used in cosmosis
+### Likelihood
+The Likelihood file is `SN_only_cosmosis_likelihood.py`
 Use this with distances and cov matrixes in folder 4_DISTANCES_COVMAT
 
-#### Chains
+### Chains
 The chain folder includes all the cosmosis/emcee chains (see file header) for the four cosmological models tested in our analysis:
 - Flat $`\Lambda`$CDM (flcdm sub-folder)
 - $`\Lambda`$CDM (lcdm sub-folder)
