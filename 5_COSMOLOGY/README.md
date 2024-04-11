@@ -4,4 +4,5 @@
 Use this with distances and cov matrixes in folder 4_DISTANCES_COVMAT
 
 
-#### Chains for all our models/sample combinations coming soon!
+#### Chains
+The chain folder includes all the cosmosis chains for the FOUR cosmological models tested in our analysis (Flat$\LambdaCDM$)
