@@ -33,17 +33,18 @@ Using the metadata, SN distances are calculated as:
 - `PROB_SCONE` - Prob of being Ia from SCONE trained on sims generated using core-collapse templates Vincenzi et al 2019
 - `PROB_SNIRFV19` - Prob of being Ia from SNIRF trained on sims generated using core-collapse templates from Vincenzi et al 2019
 - `PROBCC_BEAMS` - BEAMS Prob of being core-collapse (see eq. 6 in Vincenzi et al 2024)
-- `c` - SALT2 color
-- `cERR` - SALT2 color uncertainty
-- `x1` - SALT2 stretch
-- `x1ERR` - SALT2 stretch uncertainty
-- `mB` - SALT2 uncorrected brightness
-- `mBERR` - SALT2 uncorrected brightness uncertainty
-- `x0` - SALT2 light curve amplitude where $m_x = -2.5\mathrm{log}_{10}(x0)$ used in the modified Tripp equation
-- `x0ERR` - SALT2 light curve amplitude uncertainty
-- `COV_x1_c` - SALT2 fit covariance between x1 and c
-- `COV_x1_x0` - SALT2 fit covariance between x1 and x0
-- `COV_c_x0` - - SALT2 fit covariance between c and x0
+- `c` - SALT3 color
+- `cERR` - SALT3 color uncertainty
+- `x1` - SALT3 stretch
+- `x1ERR` - SALT3 stretch uncertainty
+- `mB` - SALT3 uncorrected brightness
+- `mBERR` - SALT3 uncorrected brightness uncertainty
+- `mB_corr` - Tripp1998 corrected/standardized mB magnitudes
+- `x0` - SALT3 light curve amplitude where $m_x = -2.5\mathrm{log}_{10}(x0)$ used in the modified Tripp equation
+- `x0ERR` - SALT3 light curve amplitude uncertainty
+- `COV_x1_c` - SALT3 fit covariance between x1 and c
+- `COV_x1_x0` - SALT3 fit covariance between x1 and x0
+- `COV_c_x0` - - SALT3 fit covariance between c and x0
 - `HOST_RA` - Host Galaxy RA
 - `HOST_DEC` - Host Galaxy DEC
 - `HOST_ANGSEP` - Angular separation between SN and host (arcsec)
@@ -55,13 +56,13 @@ Using the metadata, SN distances are calculated as:
 - `HOST_COLOR` - Host Galaxy rest-frame u-r color
 - `PKMJD` - Fit Peak Date
 - `PKMJDERR`  - Fit Peak Date Uncertainty
-- `NDOF` - Number of degrees of freedom in SALT2 fit
-- `FITCHI2` - SALT2 fit chi squared
+- `NDOF` - Number of degrees of freedom in SALT3 fit
+- `FITCHI2` - SALT3 fit chi squared
 - `FITPROB` - SNANA Fitprob
 - `biasCor_mu` - Bias correction applied to brightness m_b
 - `biasCorErr_mu`  - Uncertainty on bias correction applied to brightness m_b
 - `biasCor_mu_COVSCALE` - Reduction in uncertainty due to selection effects (multiplicative)
-- `biasCor_mu_COVADD`  - Uncertainty floor as given by the intrinsic scatter model (quadriture)
+- `biasCor_mu_COVADD`  - Uncertainty floor as given by the intrinsic scatter model (added in quadrature)
 
 ### Global Parameters ###
 - $\alpha =  0.16087 \pm 0.00152$ 
@@ -77,7 +78,10 @@ The Statistical and Stat+Systematic Covariance matrices (both 1829x1829 Matrix) 
 - STATONLY.txt.gz
 - STAT+SYS.txt.gz (all systematics)
 
-Single-syst cov matrix are also available in SingleSYS_CovMatrix.
+Note that STATONLY.txt.gz is actually an 1829x1829 matrix filled with zeros because the statistical uncertainties are included in the MUERR_FINAL in the DES-SN5YR_HD.csv file. STAT+SYS.txt.gz contains the additional systematic uncertainties.
+See the likelihood function in folder 5_COSMOLOGY to see how the likelihood is built using SN distances (MU in DES-SN5YR_HD.csv), statistical SN uncertainties (MUERR_FINAL in DES-SN5YR_HD.csv) and these covariance matrices.
+
+Single-syst cov matrices are also available in SingleSYS_CovMatrix.
 
 
 
