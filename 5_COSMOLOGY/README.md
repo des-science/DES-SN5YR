@@ -3,7 +3,7 @@
 ### Likelihood
 The Likelihood file is `dessn5yr.py`
 In the Likelihood provided, we analytically marginalize over M (SN absolute brightness) and H0 (See Sec. 3 in DES Collaboration 2024).
-M and H0 are unconstrained by our data (do not use this sample to measure H0).
+M and H0 are _unconstrained_ by our data (_do **not** use this sample to measure H0_). When you run SN only chains using our likelihood, you can vary or fix H0 and M, it doesn't matter cause in both cases, these parameters are marginalized over.
 
 Use this likelihood with distances and cov matrixes in folder 4_DISTANCES_COVMAT.
 
