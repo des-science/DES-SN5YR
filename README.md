@@ -4,7 +4,7 @@
 
 This repo contains the data, simulations, pipeline inputs and results from the Dark Energy Survey Supernova Program 5-Year results.
 
-Please check our [ReadTheDocs](desdrtest.readthedocs.io) for all details on contents and ancillary data description.
+Please check our [ReadTheDocs](https://desdrtest.readthedocs.io/en/main/) for all details on contents and ancillary data description.
 
 ### Summary and Overview of this Github folder
 
@@ -45,4 +45,4 @@ This folder includes the pippin input files needed to reproduce DES simulations 
 
 > Light curve and ancillary data release for the full Dark Energy Survey Supernova Program. JOURNAL NUMBER. [Sánchez et al (2024)](...)
 
-**Please, for the full documentation refer to [readthedocs](https://desdrtest.readthedocs.io).**
+**Please, for the full documentation refer to [readthedocs](https://desdrtest.readthedocs.io/en/main/).**
