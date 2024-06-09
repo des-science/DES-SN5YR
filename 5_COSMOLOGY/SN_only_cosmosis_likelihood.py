@@ -11,8 +11,11 @@ import numpy as np
 import pandas as pd 
 
 # Default is to use DES-SN5YR
-default_data_file = os.path.join(os.path.split(__file__)[0], "DESONLY/hubble_diagram.txt")
-default_covmat_file = os.path.join(os.path.split(__file__)[0], "DESONLY/covsys_000.txt")
+# default_data_file = os.path.join(os.path.split(__file__)[0], "DESONLY/hubble_diagram.txt")
+# default_covmat_file = os.path.join(os.path.split(__file__)[0], "DESONLY/covsys_000.txt")
+
+default_data_file = os.path.join(os.path.split(__file__)[0], "4_DISTANCES_COVMAT/DES-SN5YR_HD.csv")
+default_covmat_file = os.path.join(os.path.split(__file__)[0], "4_DISTANCES_COVMAT/STAT+SYS.txt.gz")
 
 def cov_log_likelihood(mu_model, mu, inv_cov):
     """ 
@@ -24,7 +27,7 @@ def cov_log_likelihood(mu_model, mu, inv_cov):
     chit2 = np.sum(delta @ inv_cov @ deltaT)
     B = np.sum(delta @ inv_cov)
     C = np.sum(inv_cov)
-    chi2 = chit2 - (B**2 / C) + np.log(C / (2* np.pi))
+    chi2 = chit2 - (B**2 / C) + np.log(C / (2 * np.pi))
     return -0.5*chi2
 
 class DESY5SNLikelihood(GaussianLikelihood):
@@ -44,7 +47,7 @@ class DESY5SNLikelihood(GaussianLikelihood):
         """
         filename = self.options.get_string("data_file", default=default_data_file)
         print("Loading DES Y5 SN data from {}".format(filename))
-        data = pd.read_csv(filename,delim_whitespace=True, comment='#')
+        data = pd.read_csv(filename, delim_whitespace=True, comment='#')
         self.origlen = len(data)
         # The only columns that we actually need here are the redshift,
         # distance modulus and distance modulus error
@@ -187,7 +190,6 @@ class DESY5SNLikelihood(GaussianLikelihood):
                 self.chol = np.linalg.cholesky(self.cov)
             sim = self.simulate_data_vector(x)
             block[names.data_vector, self.like_name + "_simulation"] = sim
-
 
 
 # This takes our class and turns it into 
