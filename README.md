@@ -33,6 +33,9 @@ This folder contains all the files to fully reproduce the cosmological contours 
 **5_COSMOLOGY**:
 SN likelihood and chains for the different cosmological models and data used in the [DES Collaboration (2024)](https://arxiv.org/abs/2401.02929) paper.
 
+**6_DCR_CORRECTIONS**
+Wavelength dependent corrections implemented for SMP 5YR, that depend on the airmass and color of the observed events. 
+
 **7_PIPPIN_FILES**:
 This folder includes the pippin input files needed to reproduce DES simulations and cosmological analysis.
 
