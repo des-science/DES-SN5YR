@@ -1,0 +1,34 @@
+DOCUMENTATION:
+  PURPOSE: transient lightcurve data files for analysis
+  REF:
+  - AUTHOR: Sanchez+ 2024 (DES5YR data release)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2024arXiv240605046S
+  - AUTHOR: Brout+ 2019 (SMP on DES sample)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2019ApJ...874..106B
+  - AUTHOR: Wiseman+ 2020 (host galaxy properties)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2020MNRAS.495.4040W/abstract
+  - AUTHOR: Lidman+ 2020 (OzDES spectra for SN and host galaxies)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2020MNRAS.496...19L
+  - AUTHOR: Burke+ 2018 (DES calibration and chromatic corrections)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2018AJ....155...41B
+  - AUTHOR: Lee+ 2023 (DCR corrections for DES)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2023AJ....165..222L  
+  - AUTHOR: Kessler+ 2015 (search and discovery of DES SN)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2015AJ....150..172K
+  - AUTHOR: Kessler+ 2019 (DES3YR & 5YR sims, see Sec 6.4 for scatter vs SBmag)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.1171K
+  - AUTHOR: Vincenzi+ 2024 (DES-SN5YR cosmology analysis and systematics)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2024arXiv240102945V
+  - AUTHOR: Flaugher+ 2015 (DECam; Dark Energy Camera)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2015AJ....150..150F
+
+  NOTES:
+  - NEVT_ALL           = 19706
+  - NEVT_HOSTGAL_SPECZ = 8302
+  - Applied mag corrections:  chromatic + DCR 
+       (see $SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_DCR+CHROM.DAT)
+  - Applied magerr correction:  anomalous scatter vs host surfacce brightness 
+       (see $SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_FLUXERRMODEL_FAKE.DAT)
+  - FORMAT is FITS
+DOCUMENTATION_END:
+

@@ -1,0 +1,19 @@
+DOCUMENTATION:
+  PURPOSE: low-redshift data set from PS1(griz) instrument
+  REF:
+  - AUTHOR: Foley+ 2018 (Foundation: data release of 224 light curves)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2018MNRAS.475..193F
+  - AUTHOR: Jones+ 2019 (cosmology with single PS1 instrument)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2019ApJ...881...19J
+  - AUTHOR: Brout+ 2022 (SuperCal: recalib and calib uncertainties)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2022ApJ...938..111B
+  - AUTHOR: Carr+ 2022 (updated redshifts and vpec)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2022PASA...39...46C
+  - AUTHOR: Vincenzi+ 2024 (DES-SN5YR cosmology analysis and systematics)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2024arXiv240102945V
+  NOTES:
+  - mag errors added to FLUXCALERR, so no need to use FUDGE_MAG_ERROR in LCFIT stage.
+  - These FUDGE_MAG_ERROR corrections are included:  'g .015  r .015  i .015  z .02'
+ 
+DOCUMENTATION_END:
+

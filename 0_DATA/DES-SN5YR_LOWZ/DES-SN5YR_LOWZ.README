@@ -1,0 +1,39 @@
+DOCUMENTATION:
+  PURPOSE:  combined data set for analysis
+
+  - AUTHOR:  Hicken+ 2009 (CFA3: release 185 light curves)
+    ADS:     https://ui.adsabs.harvard.edu/abs/2009ApJ...700..331H
+  - AUTHOR:  Hicken+ 2012 (CFA4: release 94 light curves)
+    ADS:     https://ui.adsabs.harvard.edu/abs/2012ApJS..200...12H
+  - AUTHOR:  Krisciunas+ 2017 (CSP DR3: release 134 light curves)
+    ADS:     https://ui.adsabs.harvard.edu/abs/2017AJ....154..211K/abstract
+
+  - AUTHOR:  Brout+ 2022 (SuperCal: recalib and calib uncertainties)
+    ADS:     https://ui.adsabs.harvard.edu/abs/2022ApJ...938..111B
+  - AUTHOR:  Carr+ 2022 (updated redshifts and vpec)
+    ADS:     https://ui.adsabs.harvard.edu/abs/2022PASA...39...46C
+  - AUTHOR:  Vincenzi+ 2024 (DES-SN5YR cosmology analysis and systematics)
+    ADS:     https://ui.adsabs.harvard.edu/abs/2024arXiv240102945V
+
+  USAGE_KEY: VERSION_PHOTOMETRY
+  USAGE_CODE: snlc_fit.exe
+  FILTERMAP:  # VERSION_ORIG  FILT_ORIG FILT_NEW  NDATA 
+  - Pantheon+_CSPDR3             ugriBVomnYyJjHh abcdefghijklmno   136
+  - Pantheon+_CFA3K              UBVri pqrst   120
+  - Pantheon+_CFA3S              UBVRI uvwxy   65
+  - Pantheon+_CFA4p1             UBVri zABCD   74
+  - Pantheon+_CFA4p2             BVri EFGH   19
+
+  NOTES:
+  - created with command $SNANA_DIR/util/combine_dataVersions.py combine_des5yr_lowz.input
+  - 414 original data files were processed.
+  - 342 combined data files includes 72 merged duplicates.
+  - These FUDGE_MAG_ERROR corrections are included,
+  -    'e 0.01 g 0.01 h 0.01 i 0.01 b 0.01 c 0.01 d 0.01'
+
+  VERSION:
+  - DATE:      2022-12-15
+    USERNAME:  mvincenzi 
+    HOSTNAME:  midway2-login2.rcc.local
+DOCUMENTATION_END: 
+
