@@ -1,5 +1,6 @@
 # DES-SN 5YR Data Release
 
+[![Documentation Status](https://readthedocs.org/projects/des-sn-dr/badge/?version=latest)](https://des-sn-dr.readthedocs.io/en/latest/?badge=latest)
 ## The Dark Energy Survey Supernova 5YR Cosmological analysis and Data Release
 
 This repo contains the data, simulations, pipeline inputs and results from the Dark Energy Survey Supernova Program 5-Year results.
