@@ -30,5 +30,28 @@ DOCUMENTATION:
   - Applied magerr correction:  anomalous scatter vs host surfacce brightness 
        (see $SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_FLUXERRMODEL_FAKE.DAT)
   - FORMAT is FITS
+
+  # spec-confirmed types labeled by SNTYPE key in DES-SN5YR_DES_HEAD.FITS
+  SNTYPE:  # integer-SNTYPE, string-type, NEVT
+    0:     NO_TYPE    19138
+    1:     SNIa       353
+    4:     SNIa-pec     1
+    5:     SNI          1  # no H in spectrum, but cant distinguisn Ia vs Ibc
+    23:    SNIIb        5
+    29:    SNII        44
+    122:   SNIIn?       1
+    129:   SNII?       16
+    32:    SNIb         1
+    33:    SNIc         4
+    39:    SNIbc       39
+    139:   SNIbc?       4
+    41:    SLSN-I      15
+    66:    SLSN-II      1
+    141:   SLSN-I?      3
+    80:    AGN         49
+    81:    TDE          1
+    82:    M-Star       2
+    180:   AGN?         1
+
 DOCUMENTATION_END:
 
