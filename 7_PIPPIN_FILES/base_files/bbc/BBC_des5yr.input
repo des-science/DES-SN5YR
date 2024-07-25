@@ -1,0 +1,83 @@
+CONFIG:
+  BATCH_INFO:  sbatch  $SBATCH_TEMPLATES/SBATCH_Midway2.TEMPLATE 10
+  BATCH_MEM: 32000
+  INPDIR+: []
+  WFITMUDIF_OPT: -speed_flag_chi2 0 -wsteps 801 -ommin 0.0 -ommax 1 -omsteps 501 -ompri 0.315 -dompri 10
+  FITOPTxMUOPT: 0+0
+
+#END_YAML
+
+datafile=None
+prefix=None
+cid_reject_file=$SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/bbc/exclude_SN_zSN.txt
+
+opt_biascor=4336
+varname_pIa=NN_PROB_IA
+simfile_biascor=something.FITRES
+simfile_ccprior=something.FITRES
+ndump_nobiascor=5
+surveygroup_biascor='CFA1+CFA2+CFA3S+CFA3K+CFA4p1+CFA4p2+CSP(zbin=0.02),FOUNDATION(zbin=0.02),DES(zbin=0.075)'
+idsurvey_list_probcc0=CFA3K,CFA4p1,CFA4p2,CSP,CFA3S,FOUNDATION,CFA1,CFA2 
+fieldGroup_biascor=X3,C3,X1+X2,S1+S2,E1+E2+C1+C2
+surveygroup_biascor_abortflag=0
+
+blindflag=0
+lensing_zpar=0.055
+min_per_zbin=1
+redchi2_tol=.01
+fitflag_sigmb=2
+iflag_duplicate=0
+
+sig1=0.04  
+
+zmin=0.025
+zmax=1.2
+nzbin=20
+powzbin=3.
+
+interp_biascor_logmass=0
+logmass_min=-15
+logmass_max=35
+nbin_logmass=2
+
+x1min=-3.0
+x1max=+3.0
+cmax=+0.3
+cmin=-0.3
+chi2max=16
+CUTWIN x1ERR 0. 1.0
+CUTWIN PKMJDERR  0. 2.0
+CUTWIN cERR 0 1.5
+CUTWIN FITPROB 0.001 1.1
+errmask_write=0
+
+p1=0.150   # same value as sims
+p2=2.87
+p3=0.0
+p4=0.0
+p5=0.00001  # same value as sims basically
+p6=0.0
+p7=10
+p8=0.001
+p9=0.685
+p10=0.0
+p11=-1.0
+p12=0.0
+p13=1.0
+
+u1=1
+u2=3
+u3=0
+u4=0
+u5=1 # fit for a mass step
+u6=0
+u7=0
+u8=0
+u9=0
+u10=0
+u11=0
+u12=0
+u13=1
+h0=70.0
+mag0=-30.00
+uave=1

@@ -1,0 +1,5 @@
+## M. Vincenzi March 28, 2023
+## File created using Phil Wiseman file SNSPECT_Transients.csv and selecting SPECZ_CATALOG==SNSPECT_SN
+## List of SNIDs for which the only available redshift source is from the SN spectral features in the SN spectrum. 
+## These events should not be included in the DES5yr analysis because their selection function is different than the sel function of the main DES5yr sample.
+1253039 1262715 1280217 1261059 1262214 1285160 1290568 1298281 1290033 1292195 1297049 1295256 1282664 1302141 1289656 1295305 1283724 1295921 1291080 1287626 1304127 1308957 1309749 1310395 1316431 1306537 1329196 1316437 1317286 1322979 1325358 1330426 1328066 1323773 1332413 1334879 1334551 1337221 1334470 1335718 1346387 1387169 1387144 1770191 1852058 1878522 1851018 1904060 1948204 1891241

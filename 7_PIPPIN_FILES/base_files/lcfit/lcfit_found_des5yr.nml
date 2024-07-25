@@ -1,0 +1,67 @@
+CONFIG:
+  APPEND_TABLE_VARLIST: TGAPMAX TrestMIN TrestMAX
+  VERSION:
+  OUTDIR:
+#END_YAML
+
+   &SNLCINP
+
+     PRIVATE_DATA_PATH  = '$SNDATA_ROOT/lcmerge/DES-SN5YR'
+     VERSION_PHOTOMETRY = 'DES-SN5YR_Foundation'
+     KCOR_FILE          = '$SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_Foundation.fits'
+
+     SNTABLE_LIST     = 'FITRES(text:host)'
+     TEXTFILE_PREFIX  = 'DES5YR_FOUND_CHANGEME'      ! changed by pippin or submit_batch_jobs
+     ROOTFILE_OUT     = 'DES5YR_FOUND_CHANGEME.ROOT' ! needed for APPEND_TABLE_VARLIST above
+
+     USE_MINOS      = T
+     NFIT_ITERATION = 2
+     INTERP_OPT     = 1
+     
+     EPCUT_SNRMIN = 'g  -8.00  r  -8.00  i  -8.00'
+
+     OPT_MWEBV       = 3    ! 3=Schafly2011 update, 2=SFD98, 1=FileDefined
+     OPT_MWCOLORLAW  = 99   ! Fitzpatrick99
+     RV_MWCOLORLAW   = 3.1
+
+  ! disable FUDGE_MAG_ERROR because this correcdtion is	included in data release;
+  ! however, apply this correction to sim
+    SIM_FUDGE_MAG_ERROR='g .015 r .015 i .015  z .02'	   
+
+  ! method to estimate initial PEAKMJD:  16=fmax clump, 4=no abort
+     OPT_SETPKMJD    = 20 
+     
+     SNCCID_IGNORE='SN2017dez'
+
+     cutwin_redshift   = 0.01, 2.0
+     cutwin_Nepoch     =  1
+	 
+     ABORT_ON_NOEPOCHS = F
+     cutwin_Trestmin   = -9999.0   5.0
+     cutwin_Trestmax   = 5.   99999.
+ 
+  &END
+
+ 
+  &FITINP
+      FITMODEL_NAME= '$SNDATA_ROOT/models/SALT3/SALT3.DES5YR'
+      RESTLAMBDA_FITRANGE= 3500.0,  8000.0
+      FILTLIST_FIT = 'griz'
+
+   ! define loose priors to avoid crazy fit
+      PRIOR_MJDSIG      =  10        ! Gauss prior on initial PKMD estimate
+      PRIOR_SHAPE_RANGE = -4.0, 4.0  ! flat x1 prior with Gauss roll off
+      PRIOR_SHAPE_SIGMA =  0.1       ! sigma of x1 Gauss roll off
+
+      FITWIN_SHAPE   = -5.0, +5.0    ! loose cut on x1 (tighter cut in BBC)
+      FITWIN_COLOR   = -0.5, +0.5    ! loose cut on c  (tighter cut in BBC)
+      FITWIN_PROB    =  0.0,  1.01   ! no cut on FITPROB/chi2
+      FITWIN_TREST   =  -15.0, 45.0  ! Trest window for epochs in fit
+      DELCHI2_REJECT =  1.0E9        ! no outlier rejection
+
+      OPT_COVAR    = 1  ! apply SALT3 cov
+      OPT_XTMW_ERR = 1  ! apply MWEBV cov
+
+      FUDGEALL_ITER1_MAXFRAC = 0.05 ! add .05*Fpeak error on 1st iteration (for stability)
+  &END
+  

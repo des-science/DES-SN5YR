@@ -1,0 +1,75 @@
+CONFIG:
+  # define extra variables to include in TEXT table output; these are extracted from ROOT table file
+  APPEND_TABLE_VARLIST: RA DEC HOST_ANGSEP TGAPMAX TrestMIN TrestMAX FLUXCALMAX_g SNRMAX_g FLUXCALMAX_r SNRMAX_r FLUXCALMAX_i SNRMAX_i FLUXCALMAX_z SNRMAX_z
+  VERSION:
+  OUTDIR:
+#END_YAML
+
+&SNLCINP
+
+    PRIVATE_DATA_PATH  = '$SNDATA_ROOT/lcmerge/DES-SN5YR'
+    VERSION_PHOTOMETRY = 'DES-SN5YR_DES' 
+    KCOR_FILE          = '$SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_DES.fits'
+
+    SNTABLE_LIST      = 'FITRES(text:host)'
+    TEXTFILE_PREFIX   = 'DES5YR_DES_CHANGEME'      ! changed by pippin or submit_batch_jobs
+    ROOTFILE_OUT      = 'DES5YR_DES_CHANGEME.ROOT' ! needed for APPEND_TABLE_VARLIST above
+
+    USE_MINOS      = T
+    NFIT_ITERATION = 3
+    INTERP_OPT     = 1
+
+  ! MWEBV info
+    OPT_MWEBV      = 3       ! 3=Schafly2011 update, 2=SFD98, 1=FileDefined
+    OPT_MWCOLORLAW = 99      ! Fitzpatrick99
+    RV_MWCOLORLAW  = 3.1
+
+  ! method to estimate initial PEAKMJD:  16=fmax clump, 4=no abort
+    OPT_SETPKMJD   = 20  
+
+    ABORT_ON_NOEPOCHS = F
+    ABORT_ON_TRESTCUT = F
+    ABORT_ON_DUPLCID  = F
+
+    CUTWIN_NEPOCH    =  5
+    CUTWIN_REDSHIFT  =  0.05, 1.2
+    CUTWIN_REDSHIFT_ERR =  0.0, 0.01
+    CUTWIN_TREST     = -20.0,   60.0
+    cutwin_Trestmin  = -9999.0   5.0
+    cutwin_Trestmax  = 5.   99999.
+    CUTWIN_MWEBV     = 0.0 0.25
+
+    CUTWIN_SNRMAX       =  5.0, 1.0E8   ! SNRMAX > 5 ...
+    CUTWIN_NFILT_SNRMAX =  2.0, 99.     ! in at least 2 bands
+
+    ! Below are epoch cuts
+    CUTWIN_PSF = 0.5, 2.75
+    CUTWIN_ZPNPE = 30.5, 100.  ! cut on ZP in Npe
+
+
+  !Jun 12 2024: RK - remove ad-hoc corrections here because they are now in the DR
+  ! FluxErr corrections only applied to data, automatically ignored for sims
+  !   FLUXERRMODEL_FILE = '$SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_FLUXERRMODEL_FAKE.DAT'
+  !
+  ! DCR and chromatic corrections only applied to data, automatically ignored for sims
+  !   MAGCOR_FILE = '$SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_DCR+CHROM.DAT'
+
+&END
+
+&FITINP
+    FITMODEL_NAME       = '$SNDATA_ROOT/models/SALT3/SALT3.DES5YR'
+    RESTLAMBDA_FITRANGE = 3500.0, 8000.0
+    FILTLIST_FIT        = 'griz'
+
+  ! loose priors to avoid crazy fit
+    PRIOR_MJDSIG      = 10        ! Gauss prior on initial PEAKMJD estimater
+    PRIOR_SHAPE_RANGE = -6.0, 6.0 ! flat x1 prior with Gauss roll off
+
+    FITWIN_SHAPE  = -5.0, +5.0   ! loose x1 cut (tighter cut at BBC stage)
+    FITWIN_COLOR  = -0.5, +0.5   ! loose  c cut (tighter cut at BBC stage)
+    FITWIN_PROB   =  0.0,  1.01  ! no cut on FITPROB or chi2
+    FITWIN_TREST=  -15.0, 45.0   ! Trest window for fitted obs
+    DELCHI2_REJECT   = 10        ! reject obs with chi2_obs>10 on 1st fit iteration
+
+    FUDGEALL_ITER1_MAXFRAC = 0.05 ! add .05*Fpeak error on 1st iteration (for stability)
+&END

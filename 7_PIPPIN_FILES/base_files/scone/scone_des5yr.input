@@ -1,0 +1,40 @@
+# Created Jun 2024 by R.Kessler
+# base input file for scone; pippin makes modifications as needed.
+# This base file is for refactored pippin+scone; not needed for legacy scone.
+
+# ==========================================================================
+sbatch_template_default:      $SBATCH_TEMPLATES/SBATCH_scone_cpu.TEMPLATE
+sbatch_ncore_heatmaps:  20
+sbatch_mem:             40     # GB 
+
+mode:   predict 
+
+# ===============================
+
+
+nevt_select_heatmaps:  50000,50000  # Ia,nonIa (for train only)
+
+# ======================
+
+init_env_train:     source activate scone_cpu_tf2.6
+init_env_heatmaps:  source activate scone_cpu_tf2.6
+
+batch_size:    32
+num_epochs:          400
+num_mjd_bins:        180 
+num_wavelength_bins: 32  
+
+# define a few keys that are modified by pippin.
+
+prob_column_name:  PROB_CHANGE_ME
+output_path:  $PIPPIN_OUTPUT/D5YR_ANALYSIS/3_CLAS/CHANGE_ME
+
+# ======================================= 
+# keys added/modified by pippin
+ 
+sbatch_job_name: CHANGE_ME
+
+input_data_paths:
+  - CHANGE_ME
+
+trained_model:  CHANGE_ME

@@ -1,6 +1,4 @@
 # SN~Iax from Saurabh
-INPUT_FILE_INCLUDE: surveys/des/sims_instrument/sim_des_5yr_phot_include.input
-
 GENTYPE:  11
 
 ## M. Vincenzi updated this on Dec 2021 to match Vincenzi et al. 2020 and to use the 
@@ -9,6 +7,7 @@ GENMODEL: $PLASTICC_ROOT/model_libs_updates/SIMSED.SNIax
 
 SIMSED_USE_BINARY:   1
 SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+HOSTLIB_WGTMAP_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_DES_TypeIax.WGT
 
 # Volumetric rate
 DNDZ: MD14  6.0E-6      # MD14 SFR(z), with 6E-6/yr/Mpc^3 at z=0

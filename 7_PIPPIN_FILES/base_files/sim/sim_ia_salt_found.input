@@ -1,45 +1,41 @@
-#0;95;0c  
 ########################################################
-#
-# Input file for $SNANA_DIR/bin/snlc_sim.exe
-#
-#
+# Foundation SN simulation input file for $SNANA_DIR/bin/snlc_sim.exe
 #########################################################
 
 NGENTOT_LC:    500000
 GENVERSION: Foundation_simup         # SNDATA version to generate
 GENSOURCE:  RANDOM
 GENTYPE:   1
-GENMODEL:  SALT2.JLA-B14
+GENMODEL:  $SNDATA_ROOT/models/SALT3/SALT3.DES5YR
+GENPDF_FILE: $SNDATA_ROOT/models/population_pdf/DES-SN5YR/DES-SN5YR_FOUND_S3_P21.DAT
+GENPDF_OPTMASK: 1
 
-SIMLIB_FILE: $DES5YR/base/foundation/sims_ia/found_yse.simlib
+SIMLIB_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_FOUND.SIMLIB
 SOLID_ANGLE: 6.28
 USE_SIMLIB_PEAKMJD: 1
 
 RESTLAMBDA_FITRANGE: 3000 13000
 CIDOFF: 70000
-KCOR_FILE:  $PS1_ROOT/kcor/PS1/PS1_DS15/kcor_PS1_none.fits
-APPLY_SEARCHEFF_OPT: 3
+KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_Foundation.fits.gz
 
-GENMAG_SMEAR_MODELNAME: G10
-# selection criteria for generation
-GENFILTERS:       gri
+GENSIGMA_VPEC:   300
+VPEC_ERR:      270
+
+GENFILTERS: griz
 
 GENSIGMA_SEARCH_PEAKMJD:  1.0         # sigma-smearing for  SEARCH_PEAKMJD (days)
 
 GENRANGE_PEAKMJD:  57000.0  57480.0
 #SOLID_ANGLE: 6.28 # 1 field, 7 sq degreees *7
 
-GENRANGE_REDSHIFT:  0.009    0.11
 GENSIGMA_REDSHIFT:  0.000001
 DNDZ: POWERLAW  2.6E-5  2.2
-GENSIGMA_VPEC: 250 #this we will need to play with this for redshift uncertainty
 GENRANGE_TREST:   -20.0    80.0     # rest epoch relative to peak (days)
+GENRANGE_REDSHIFT:  0.007   0.11
 
-# GENMEAN_RV:         3.1               # mean RV to generate
-
-OPT_MWEBV: 1
-
+OPT_MWEBV:      3    # 3=Schlaffly 2011
+OPT_MWCOLORLAW: 99   # 99=Fitzpatrick99
+RV_MWCOLORLAW: 3.1
 
 RANSEED: 128473       # random number seed
 
@@ -48,8 +44,8 @@ SMEARFLAG_FLUX:    1  # photo-stat smearing of signal, sky, etc ...
 SMEARFLAG_ZEROPT:  1  # smear zero-point with zptsig
 # SMEARFLAG_HOSTGAL: 0  # include host-gal noise
 
-
-SEARCHEFF_SPEC_FILE:  $DES5YR/base/foundation/sims_ia/SEARCHEFF_Found.DAT #this is the big one for now.
+APPLY_SEARCHEFF_OPT: 3
+SEARCHEFF_SPEC_FILE:  $SNDATA_ROOT/models/searcheff/SEARCHEFF_SPEC_FOUND_DES-SN5YR.DAT
 APPLY_CUTWIN_OPT:     1
 CUTWIN_NEPOCH:   3 3.              # require 5 epochs (no S/N requirement)
 CUTWIN_TRESTMIN: -20  10
@@ -60,15 +56,11 @@ FORMAT_MASK:  2 # terse format
 CUTWIN_SNRMAX:   7 gri 2 -20. 80.
 CUTWIN_SNRMAX:   9.0 gri 1 -20. 80. 
 
-
-HOSTLIB_FILE: $PS1_ROOT/simlib/DS_empty.HOSTLIB
+HOSTLIB_FILE:  $SNDATA_ROOT/simlib/DES/DES-SN5YR_LOWZ.HOSTLIB
+HOSTLIB_SCALE_PROPERTY_ERR: 0.0(LOGMASS),0.0(LOGSFR),0.0(LOGsSFR),0.0(COLOR)
+HOSTLIB_MSKOPT: 258
 HOSTLIB_STOREPAR: LOGMASS
 HOSTLIB_DZTOL: 0.03 0 0.
-
-# cosmological params for lightcurve generation and redshift distribution
-OMEGA_MATTER:  0.311
-OMEGA_LAMBDA:  0.689
-W0_LAMBDA:    -1.00
-H0:           70.0   
+HOSTLIB_WGTMAP_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_FOUND.WGT
 
 SIMGEN_DUMP:  6  Z  PEAKMJD S2c S2x1 SNRMAX MAGT0_g

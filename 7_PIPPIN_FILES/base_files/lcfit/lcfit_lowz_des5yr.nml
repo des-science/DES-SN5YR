@@ -1,0 +1,71 @@
+CONFIG:
+  APPEND_TABLE_VARLIST: TGAPMAX TrestMIN TrestMAX
+  VERSION:
+  OUTDIR:
+#END_YAML
+
+
+ &SNLCINP
+
+    PRIVATE_DATA_PATH  = '$SNDATA_ROOT/lcmerge/DES-SN5YR'
+    VERSION_PHOTOMETRY = 'DES-SN5YR_LOWZ'
+    KCOR_FILE          = '$SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_LOWZ.fits'
+
+    SNTABLE_LIST      = 'FITRES(text:host)'
+    TEXTFILE_PREFIX   = 'DES5YR_LOWZ_CHANGEME'      ! changed by pippin or submit_batch_jobs
+    ROOTFILE_OUT      = 'DES5YR_LOWZ_CHANGEME.ROOT' ! needed for APPEND_TABLE_VARLIST above
+
+    USE_MINOS      = T
+    NFIT_ITERATION = 3
+    INTERP_OPT     = 1
+
+  ! method to estimate initial PEAKMJD:  16=fmax clump, 4=no abort
+    OPT_SETPKMJD = 20  
+
+    RV_MWCOLORLAW  = 3.1
+    OPT_MWCOLORLAW = 99
+    OPT_MWEBV      = 3    ! 3-> Schlaffly 2011 correction to SFD98
+
+  ! disable FUDGE_MAG_ERROR because this correcdtion is included in data release;
+  ! however, apply this correction to sim
+    SIM_FUDGE_MAG_ERROR = 'e 0.01 g 0.01 h 0.01 i 0.01 b 0.01 c 0.01 d 0.01'
+
+    ABORT_ON_NOEPOCHS = F
+    ABORT_ON_TRESTCUT = F
+    ABORT_ON_DUPLCID  = F
+
+    CUTWIN_MJD           = 20000, 99999
+    CUTWIN_NEPOCH        =  5
+    CUTWIN_REDSHIFT      =  0.01, 0.1
+    CUTWIN_REDSHIFT_ERR  =  0.0, 0.01
+    CUTWIN_TREST      = -20.0,   60.0
+    cutwin_Trestmin   = -9999.0   5.0
+    cutwin_Trestmax   = 5.   99999.
+    CUTWIN_TRESTRANGE = 10, 999    ! TrestMax - TrestMin
+    CUTWIN_MWEBV      = 0.0 0.25 
+
+    CUTWIN_SNRMAX       =  5.0, 1.0E8  ! require SNRMAX >  5 ...
+    CUTWIN_NFILT_SNRMAX =  2.0, 99.    ! in at least 2 bands
+
+&END
+
+&FITINP
+    FITMODEL_NAME  = '$SNDATA_ROOT/models/SALT3/SALT3.DES5YR'
+
+    FILTLIST_FIT = 'bcdefghijklmnoqrstvwxyABCDEFGH' !remove a,p,z,u corresponding to U and u
+
+    RESTLAMBDA_FITRANGE = 3500.0, 8000.0
+
+    FUDGEALL_ITER1_MAXFRAC = 0.05 ! add .05*Fpeak error on 1st iteration (for stability)
+
+  ! define loose priors to avoid crazy fit
+    PRIOR_MJDSIG        = 10       ! Gauss prior (days) on initial PKMJD estimate
+    PRIOR_SHAPE_RANGE   = -6.0, 6.0  ! flat x1 prior with Gauss roll-off
+
+    FITWIN_SHAPE      = -5.0, +5.0   ! loose x1 cut (tighter cut at BBC stage)
+    FITWIN_COLOR      = -0.5, +0.5   ! loose  c cut (tighter cut at BBC stage)
+    FITWIN_PROB       =  0.0,  1.01  ! no cut on FITPROB/chi2
+    FITWIN_TREST      = -15.0, 45.0  ! Trest window to include epochs
+    DELCHI2_REJECT    = 10           ! reject obs if chi2_obs>10 after first fit-iteration
+
+&END
