@@ -1,12 +1,15 @@
-# % include: $SNDATA_ROOT/sample_input_files/DES-SN5YR/D5yr_anchors_lcfit.yml %
+# Before using this input file:
+#  - check keys below with CHANGE in comment field
+#  - check optional OUTPUT redirect
+#
+
 # % include: $SNDATA_ROOT/sample_input_files/DES-SN5YR/D5yr_anchors_sim.yml %
 
 #### Change the following PATH options depending on the machine/cluster you are using #####
 #### By default, everything is saved in $PIPPIN_OUTPUT
-GLOBAL:
-  OUTPUT:
-    output_dir: $DES5YR/pippin_output/test
-
+#GLOBAL:
+#  OUTPUT:
+#    output_dir: $DES5YR/pippin_output/test
 
 ALIAS:
 
@@ -15,47 +18,6 @@ ALIAS:
      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 5
   BATCHINFO20: &batchinfo20
      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 20
-
-
-  FOUNDKCOR: &foundkcor
-     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_Foundation.fits.gz
-  LOWZKCOR: &lowzkcor
-     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_LOWZ.fits.gz
-  DESKCOR: &deskcor
-     KCOR_FILE: $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_DES.fits.gz
-
-  DCR_CORRECTIONS: &dcr_corrections
-     MAGCOR_FILE: '$SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_DCR+CHROM.DAT'
-
-  BBC4D_SIGINT_COLOR: &bbc4d_sigint_color
-    opt_biascor: 4336
-    u2: 3
-    nbin_logmass: 2
-    sig1: 0.01
-
-  BBC_GENERAL: &bbc_general
-    interp_biascor_logmass: 0
-    logmass_min: -15
-    logmass_max: 35
-    ndump_nobiascor: 500
-    u5: 1 #fit for mass step
-    p5: 0.00001 # same value as sims basically
-    p8: 0.001
-    iflag_duplicate: 0
-    ndump_nobiascor: 500
-    fitflag_sigmb: 2
-    fieldGroup_biascor: X3,C3,X1+X2,S1+S2,E1+E2+C1+C2
-    p1: 0.150 # same value as sims
-    p2: 2.87
-    CUTWIN_cERR: 0 1.5
-    CUTWIN_FITPROB: 0.001 1.1
-    p9: 0.685
-    p10: 0.0
-    p11: -1.0
-    p12: 0.0    
-    surveygroup_biascor: 'CFA1+CFA2+CFA3S+CFA3K+CFA4p1+CFA4p2+CSP(zbin=0.02),FOUNDATION(zbin=0.02),DES(zbin=0.075)'
-    zmin: 0.025
-    cid_reject_file: /project2/rkessler/SURVEYS/DES/ROOT/analysis_photoIa_5yr/base/exclude_SN_zSN.txt
 
   APPLY_CHI2MAX: &apply_chi2max
     chi2max: 16
@@ -119,101 +81,52 @@ SIM:
 
 LCFIT:
   Lsys:
-    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lowz_fordes5yr.nml
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lcfit_lowz_des5yr.nml
     MASK: DATALOWZ
-    SNLCINP:
-      <<: *opt_snlcinp
-      <<: *lowzkcor
-      <<: *minos_on
     FITOPTS:
       - $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/fitopts.yml
-    FITINP:
-      <<: *opt_fitinp
-      <<: *s3fit
     OPTS:
-      <<: *appendfitres
       OPT_SNCID_LIST: 1
       <<: *batchinfo
 
   Dsys:
-    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/desSMP_5yr.nml
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lcfit_desSMP_5yr.nml
     MASK: DATADES
-    SNLCINP:
-      <<: *opt_snlcinp
-      <<: *deskcor
-      FLUXERRMODEL_FILE: '$DES_ROOT/starterKits/make_fluxerr_model/OUT_SMP/FLUXERRMODEL_FAKE.DAT'
-      <<: *dcr_corrections
-      <<: *minos_on
     FITOPTS:
       - $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/fitopts.yml
-    FITINP:
-      <<: *opt_fitinp
-      <<: *s3fit
     OPTS:
       OPT_SNCID_LIST: 1
       <<: *batchinfo
 
   Fsys:
-    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/found_des5yr.nml
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lcfit_found_des5yr.nml
     MASK: DATAFOUND
-    SNLCINP:
-      <<: *opt_snlcinp
-      <<: *foundkcor
-      <<: *minos_on
     FITOPTS:
       - $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/fitopts.yml
-    FITINP:
-      <<: *opt_fitinp
-      <<: *s3fit
     OPTS:
       OPT_SNCID_LIST: 1
       <<: *batchinfo
 
-
   L3:
-    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lowz_fordes5yr.nml
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lcfit_lowz_des5yr.nml
     MASK: LOWZ
-    SNLCINP:
-      <<: *opt_snlcinp
-      <<: *minos_on
-      <<: *lowzkcor
-    FITINP:
-      <<: *opt_fitinp
-      <<: *s3fit
     OPTS:
-      <<: *appendfitres
       <<: *batchinfo
     EXTERNAL_DIRS:
       - $PIPPIN_OUTPUT/D5YR_BIASCOR/2_LCFIT/L3_BIASCORSIM_LOWZ
 
   F3:
-    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/found_des5yr.nml
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lcfit_found_des5yr.nml
     MASK: FOUND
-    SNLCINP:
-      <<: *opt_snlcinp
-      <<: *minos_on
-      <<: *foundkcor
-    FITINP:
-      <<: *opt_fitinp
-      <<: *s3fit
     OPTS:
-      <<: *appendfitres
       <<: *batchinfo
     EXTERNAL_DIRS:
       - $PIPPIN_OUTPUT/D5YR_BIASCOR/2_LCFIT/F3_BIASCORSIM_FOUND
 
   D3:
-    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/desSMP_5yr.nml
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/lcfit/lcfit_desSMP_5yr.nml
     MASK: DES
-    SNLCINP:
-      <<: *opt_snlcinp
-      <<: *minos_on
-      <<: *deskcor
-    FITINP:
-      <<: *opt_fitinp
-      <<: *s3fit
     OPTS:
-      <<: *appendfitres_des
       <<: *batchinfo
       BATCH_MEM: 16GB
     EXTERNAL_DIRS:
@@ -221,14 +134,6 @@ LCFIT:
       - $PIPPIN_OUTPUT/D5YR_BIASCOR/2_LCFIT/D3_BIASCORSIM_DESCC
 
 CLASSIFICATION:
-#  UNITY:
-#    CLASSIFIER: PerfectClassifier
-#    MODE: predict
-#    MASK: DES
-#    OPTS:
-#      PROB_IA: 1.0
-#      PROB_CC: 1.0
-
   SNNTESTV19_z_data:
     CLASSIFIER: SuperNNovaClassifier
     MODE: predict
@@ -241,7 +146,7 @@ CLASSIFICATION:
       NORM: cosmo  # How to normalise LCs. Other options are "perfilter" or "cosmo".
       BATCH_REPLACE:
         REPLACE_MEM: 4GB
-        REPLACE_WALLTIME: "01:00:00"
+        REPLACE_WALLTIME: "02:00:00"
 
   SNNTESTJ17_z_data:
     CLASSIFIER: SuperNNovaClassifier
@@ -255,7 +160,7 @@ CLASSIFICATION:
       NORM: cosmo  # How to normalise LCs. Other options are "perfilter" or "cosmo".
       BATCH_REPLACE:
         REPLACE_MEM: 4GB
-        REPLACE_WALLTIME: "01:00:00"
+        REPLACE_WALLTIME: "02:00:00"
 
   SNNTESTDESCC_z_data:
     CLASSIFIER: SuperNNovaClassifier
@@ -269,19 +174,24 @@ CLASSIFICATION:
       NORM: cosmo  # How to normalise LCs. Other options are "perfilter" or "cosmo".
       BATCH_REPLACE:
         REPLACE_MEM: 4GB
-        REPLACE_WALLTIME: "01:00:00"
+        REPLACE_WALLTIME: "02:00:00"
  
+  # The scone BASE input file triggers pippin to use scone that was refactored after
+  # DES-SN5YR. The refactor is organizational and does not impact training or predict mode.
+  # Removing BASE input file results in use the origina/legacy scone code, but the 
+  # legacy code may not be supported in distant future.
+  #
   SCONETESTV19_z_data:
     CLASSIFIER: SconeClassifier
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/scone/scone_des5yr.input
     MODE: predict
     MASK: DATADES
-    GPU: False # --> set this to True if your testing sample is LARGE (e.g. if your testing sample is a BiasCor simulation)
+    GPU: False # --> set this to True if your testing sample is LARGE 
     OPTS:
       TRAINED_MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SCONEV19
-      MODEL: $SNDATA_ROOT/models/classifiers/DES-SN5YR/SCONEV19
       BATCH_REPLACE:
         REPLACE_MEM: 20GB
-        REPLACE_WALLTIME: "01:00:00"
+        REPLACE_WALLTIME: "02:00:00"
 
   SNIRFTESTV19_data:
     CLASSIFIER: SnirfClassifier
@@ -327,7 +237,7 @@ MERGE:
 
 BIASCOR:
   NOMINAL:
-    BASE: $DES5YR/base/SALT2mu_5yr.input
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/bbc/BBC_des5yr.input
     DATA: [ Lsys_DATALOWZ, Dsys_DATADES5YRSMP, Fsys_DATAFOUND]
     SIMFILE_BIASCOR: [L3_BIASCORSIM_LOWZ, D3_BIASCORSIM_DES, F3_BIASCORSIM_FOUND]
     SIMFILE_CCPRIOR: D3_BIASCORSIM_DESCC
@@ -376,13 +286,10 @@ BIASCOR:
     OPTS:
       <<: *batchinfo20
       BATCH_MEM: 32000
-      <<: *bbc4d_sigint_color
-      <<: *bbc_general
       <<: *apply_chi2max
 
-
   NOMINALSIM:
-    BASE: $DES5YR/base/SALT2mu_5yr.input
+    BASE: $SNDATA_ROOT/sample_input_files/DES-SN5YR/base_files/bbc/BBC_des5yr.input
     DATA: [ Lsys_DATALOWZSIM, Dsys_DATADESSIM, Dsys_DATADESCCSIM, Fsys_DATAFOUNDSIM ]
     SIMFILE_BIASCOR: [L3_BIASCORSIM_LOWZ, D3_BIASCORSIM_DES, F3_BIASCORSIM_FOUND]
     SIMFILE_CCPRIOR: D3_BIASCORSIM_DESCC
@@ -431,8 +338,6 @@ BIASCOR:
     OPTS:
       <<: *batchinfo20
       BATCH_MEM: 32000
-      <<: *bbc4d_sigint_color
-      <<: *bbc_general
       <<: *apply_chi2max
 
 CREATE_COV:
