@@ -51,4 +51,4 @@ This folder includes the pippin input files needed to reproduce DES simulations 
 
 > Light curve and ancillary data release for the full Dark Energy Survey Supernova Program. JOURNAL NUMBER. [Sánchez et al (2024)](...)
 
-**Please, for the full documentation refer to [ReadTheDocs](https://des-sn-dr.readthedocs.org/en/main/).**
+**Please, for the full documentation refer to [ReadTheDocs](https://des-sn-dr.readthedocs.org).**
