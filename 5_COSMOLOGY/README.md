@@ -21,3 +21,12 @@ And for the different probes combination
 - DES-SN + BAO and 3x2pt + CMB
 
 
+## NOTE on Flat $`w_0 w_a`$CDM chains
+In the official DES-SN5YR results paper, we use PolyChord chains for the plots. All the best-fit values presented in Table 2 are measured from the emcee chains. 
+The PolyChord chains (which were solely used for plots) were run setting loose converge requirements, resulting in slightly inaccurate plotted results. 
+Below, we compare contours for three different approaches:
+- PolyChord (inaccurate due to poor convergence)
+- emcee (most accurate results; numbers reported in Table 2)
+- χ² minimization approach (for SN-alone contours, a χ² minimization approach also provides robust results)
+
+![Screenshot 2024-08-13 at 22 51 02](https://github.com/user-attachments/assets/2c11c3ae-e66e-4130-bfa2-c4ec237ed41a)
