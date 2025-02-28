@@ -1,6 +1,14 @@
 # Before using this input file:
-#  - check keys below with CHANGE in comment field
-#  - check optional OUTPUT redirect
+#
+# 1) CHANGE the NAME of this file!
+#    Keep in mind that the output folder will automatically have the same name as the input file 
+#    but in all caps. Therefore, if you run this input YAML file without renaming it, the output 
+#    folder will be automatically named D5YR_SIM_NOMINAL, which could overwrite existing folders.
+#    To avoid this, it’s generally good practice (especially when working on a shared machine or cluster) 
+#    to prefix your Pippin job filenames with your initials.
+#    For example, if Maria Vincenzi is running a job, she might name her file: MV_myfile.yml
+# 2) check keys below with CHANGE in comment field
+# 3) check optional OUTPUT redirect
 #
 
 # % include: $SNDATA_ROOT/sample_input_files/DES-SN5YR/D5yr_anchors_sim.yml %
