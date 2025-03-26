@@ -27,17 +27,25 @@ Using the metadata, SN distances are calculated as:
 - `zCMBERR` - CMB Corrected Redshift Uncertainty
 - `zHD` - Hubble Diagram Redshift (with CMB and VPEC corrections)
 - `zHDERR` - Hubble Diagram Redshift Uncertainty
-- `MU` - SN distances (assuming H0 of 70)
-- `PROB_SNNV19` - Prob of being Ia from SuperNNova trained on sims generated using core-collapse templates from Vincenzi et al 2019 (Nominal)
-- `PROB_SNNDESCC` - Prob of being Ia from SuperNNova trained on sims generated using core-collapse templates from Jones et al 2017
-- `PROB_SNNJ17` - Prob of being Ia from SuperNNova trained on sims generated using core-collapse templates from DES data
-- `PROB_SCONE` - Prob of being Ia from SCONE trained on sims generated using core-collapse templates Vincenzi et al 2019
-- `PROB_SNIRFV19` - Prob of being Ia from SNIRF trained on sims generated using core-collapse templates from Vincenzi et al 2019
-- `PROBCC_BEAMS` - BEAMS Prob of being core-collapse (see eq. 6 in Vincenzi et al 2024)
-- `c` - SALT3 color
-- `cERR` - SALT3 color uncertainty
+- `VPEC` - Peculiar velocity (km/s)
+- `VPECERR` - Peculiar velocity uncertainty (km/s)
+- `MWEBV` - Milky Way E(B-V)
+- `HOST_ZSPEC` - Host spectroscopic redshift (heliocentric frame, same as zHEL).
+- `HOST_ZSPECERR` - Uncertainty in host spectroscopic redshift.
+- `HOST_RA` - Host Galaxy RA
+- `HOST_DEC` - Host Galaxy DEC
+- `HOST_ANGSEP` - Angular separation between SN and host (arcsec)
+- `HOST_DDLR` - directional light radius distance between SN and host (dimentionless)
+- `HOST_LOGMASS` - Host Galaxy Log Stellar Mass
+- `HOST_LOGMASS_ERR` - Uncertainty in Host Galaxy Log Stellar Mass
+- `HOST_COLOR` - Host Galaxy rest-frame u-r color
+- `HOST_COLOR_ERR` - Uncertainty in Host Galaxy rest-frame u-r color
+- `PKMJD` - Fit Peak Date
+- `PKMJDERR`  - Fit Peak Date Uncertainty
 - `x1` - SALT3 stretch
 - `x1ERR` - SALT3 stretch uncertainty
+- `c` - SALT3 color
+- `cERR` - SALT3 color uncertainty
 - `mB` - SALT3 uncorrected brightness
 - `mBERR` - SALT3 uncorrected brightness uncertainty
 - `mB_corr` - Tripp1998 corrected/standardized mB magnitudes
@@ -46,23 +54,16 @@ Using the metadata, SN distances are calculated as:
 - `COV_x1_c` - SALT3 fit covariance between x1 and c
 - `COV_x1_x0` - SALT3 fit covariance between x1 and x0
 - `COV_c_x0` - - SALT3 fit covariance between c and x0
-- `HOST_RA` - Host Galaxy RA
-- `HOST_DEC` - Host Galaxy DEC
-- `HOST_ANGSEP` - Angular separation between SN and host (arcsec)
-- `HOST_DDLR` - directional light radius distance between SN and host (dimentionless)
-- `HOST_ZSPEC` - Host spectroscopic redshift (heliocentric frame, same as zHEL).
-- `HOST_ZSPECERR` - Uncertainty in host spectroscopic redshift.
-- `VPEC` - Peculiar velocity (km/s)
-- `VPECERR` - Peculiar velocity uncertainty (km/s)
-- `MWEBV` - Milky Way E(B-V)
-- `HOST_LOGMASS` - Host Galaxy Log Stellar Mass
-- `HOST_LOGMASS_ERR` - Uncertainty in Host Galaxy Log Stellar Mass
-- `HOST_COLOR` - Host Galaxy rest-frame u-r color
-- `HOST_COLOR_ERR` - Uncertainty in Host Galaxy rest-frame u-r color
-- `PKMJD` - Fit Peak Date
-- `PKMJDERR`  - Fit Peak Date Uncertainty
 - `NDOF` - Number of degrees of freedom in SALT3 fit
 - `FITPROB` - SNANA Fitprob
+- `PROB_SCONE` - Prob of being Ia from SCONE trained on sims generated using core-collapse templates Vincenzi et al 2019
+- `PROB_SNIRFV19` - Prob of being Ia from SNIRF trained on sims generated using core-collapse templates from Vincenzi et al 2019
+- `PROB_SNNDESCC` - Prob of being Ia from SuperNNova trained on sims generated using core-collapse templates from Jones et al 2017
+- `PROB_SNNJ17` - Prob of being Ia from SuperNNova trained on sims generated using core-collapse templates from DES data
+- `PROB_SNNV19` - Prob of being Ia from SuperNNova trained on sims generated using core-collapse templates from Vincenzi et al 2019 (Nominal)
+- `MU` - SN distance moduli 
+- `MUERR_FINAL` - SN distance uncertainties (renormalized for BEAMS prob of being core-collapse, also referred to as MUERR_FINAL)
+- `PROBCC_BEAMS` - BEAMS Prob of being core-collapse (see eq. 6 in Vincenzi et al 2024)
 - `biasCor_mu` - Bias correction applied to brightness m_b
 - `biasCor_mu_COVSCALE` - Reduction in uncertainty due to selection effects (multiplicative)
 - `biasCor_mu_COVADD`  - Uncertainty floor as given by the intrinsic scatter model (added in quadrature)
