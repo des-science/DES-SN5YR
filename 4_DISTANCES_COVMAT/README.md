@@ -20,7 +20,7 @@ Using the metadata, SN distances are calculated as:
 - `CID` - Candidate ID
 - `CIDint` - Candidate ID integer (same as CID except for those starting with letters e.g. sn2000aa)
 - `IDSURVEY` - {10:'DES', 61:'CFA1', 62:'CFA2', 63:'CFA3S', 64:'CFA3K' ,65:'CFA4p2', 66:'CFA4p3', 150:'FOUND'}
-- `TYPE` - Type of supernova, 1=Type Ia (everything in this file is 1)
+- `TYPE` - Info on SN type
 - `zHEL` - Heliocentric Redshift
 - `zHELERR` - Heliocentric Redshift Uncertainty
 - `zCMB` - CMB Corrected Redshift
