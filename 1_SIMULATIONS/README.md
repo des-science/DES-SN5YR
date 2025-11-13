@@ -1,6 +1,6 @@
-# DES-SN5YR mock simulations:
+# DES-Dovekie mock simulations:
 
-We present 25 mocks of the DES-SN5YR sample.
+We present 25 mocks of the DES-Dovekie sample.
 These simulations have been mainly used for testing and validation of our cosmological analysis.
 
 ## Key Infos:
@@ -22,7 +22,7 @@ The main references that describe the assumptions and inputs used to generate th
 - Kessler et al., 2019: https://arxiv.org/abs/1811.02379
 - Vincenzi et al., 2022: https://arxiv.org/abs/2012.07180
 - Qu et al., 2024: https://arxiv.org/abs/2307.13696
-- Vincenzi et al., 2024: https://arxiv.org/abs/2401.02945
+- Popovic et al. 2026: https://arxiv.org/abs/2511.07517
 
 ## Reproduce the simulations:
 The pippin input files used to generate the mocks are available in the folder: 7_PIPPIN_FILES (D5yr_sim_nominal.yml).

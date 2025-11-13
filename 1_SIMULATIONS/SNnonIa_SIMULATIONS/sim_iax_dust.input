@@ -1,0 +1,33 @@
+
+
+# SN~Iax from Saurabh
+GENTYPE:  11
+
+
+GENVERSION: DES_IAX_TEST_DES-SN5YR
+NGENTOT_LC: 500
+
+## M. Vincenzi updated this on Dec 2021 to match Vincenzi et al. 2020 and to use the 
+## new binary files created using make_simsed_binaries.py
+GENMODEL: $PLASTICC_ROOT/model_libs_updates/SIMSED.SNIax
+
+SIMSED_USE_BINARY:   1
+SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+HOSTLIB_WGTMAP_FILE: $SNDATA_ROOT/simlib/DES/DES-SN5YR_WGTmaps/DES-SN5YR_DES_TypeIax.WGT
+
+# Volumetric rate
+DNDZ: MD14  6.0E-6      # MD14 SFR(z), with 6E-6/yr/Mpc^3 at z=0
+
+# random pick of each SED sequence
+SIMSED_GRIDONLY:  Iax_INDEX
+
+## M. Vincenzi updated this to match Vincenzi et al 2020
+GENRANGE_AV: 0.001 3.
+GENTAU_AV: 1.7
+GENSIG_AV: 0.6
+GENRATIO_AV0: 4.
+
+GENPEAK_RV: 3.1
+GENRANGE_RV: 3.0 3.2
+
+INPUT_FILE_INCLUDE: sim_des5yr_survey.input
