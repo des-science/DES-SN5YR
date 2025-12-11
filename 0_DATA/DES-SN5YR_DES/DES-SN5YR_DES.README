@@ -5,6 +5,8 @@ DOCUMENTATION:
     ADS:    https://ui.adsabs.harvard.edu/abs/2024arXiv240605046S
   - AUTHOR: Brout+ 2019 (SMP on DES sample)
     ADS:    https://ui.adsabs.harvard.edu/abs/2019ApJ...874..106B
+  - AUTHOR: Brout+ 2022 (Fragilistic recalib and calib uncertainties)
+    ADS:    https://ui.adsabs.harvard.edu/abs/2022ApJ...938..111B
   - AUTHOR: Wiseman+ 2020 (host galaxy properties)
     ADS:    https://ui.adsabs.harvard.edu/abs/2020MNRAS.495.4040W/abstract
   - AUTHOR: Lidman+ 2020 (OzDES spectra for SN and host galaxies)
@@ -29,7 +31,13 @@ DOCUMENTATION:
        (see $SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_DCR+CHROM.DAT)
   - Applied magerr correction:  anomalous scatter vs host surfacce brightness 
        (see $SNDATA_ROOT/simlib/DES/DES-SN5YR_DES_FLUXERRMODEL_FAKE.DAT)
+  - AB + Fragilistic offsets are not applied to data, but are defined in kcor/calib file 
+       $SNDATA_ROOT/kcor/DES/DES-SN5YR/calib_DES-SN5YR_DES.input 
   - FORMAT is FITS
+
+  UPDATES:
+  - 2025-04: change filter names g,r,i,z to DES-g, DES-r, DES-i, DES-z so that SNN classifer works 
+  - 2025-12: update correct HOSTGAL_MAG_[band] & HOSTGAL_MAGERR_[band] (R.Kessler, J.Lee)
 
   # spec-confirmed types labeled by SNTYPE key in DES-SN5YR_DES_HEAD.FITS
   SNTYPE:  # integer-SNTYPE, string-type, NEVT
