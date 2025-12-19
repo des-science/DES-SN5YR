@@ -35,7 +35,7 @@ Variable name                : Description
 * `HOSTGAL_SPECZ[_ERR]`        : zSpec of host (-9 -> not available)
 * `HOSTGAL_PHOTOZ[_ERR]`       : zphot (mean of PDF); -9 -> not available
 * `HOSTGAL_ZPHOT_Q[PPP]`       : redshift containing PPP percent of zPDF prob
-* `HOSTGAL_LOGMASS[_ERR]`      : logmass and error
+* `HOSTGAL_LOGMASS[_ERR]`      : logmass and error, note that errors are statistical only and hence smaller than typically assumed values of 0.1 to 0.2 dex
 * `HOSTGAL_LOGSFR[_ERR]`       : log(star formation rate) and error
 * `HOSTGAL_MAG_[band]`         : host mags for band=u,g,r,i,z,Y
 * `HOSTGAL_MAGERR_[band]`      : uncertainty on above mags [Each hostgal_xxx has hostgal2_xxx for 2nd host-match;
