@@ -1,3 +1,10 @@
+# Important Changes
+
+Please note that the Covariance Matrices provided here are _inverse_ covariance matrices, and that the code to unpack them and make them into a useable form is provided in the likelihood function. 
+
+Additionally, DES-SN55YR_HD.csv is ordered correctly for use alongside the covariance matrix; the file with the metadata information has a slightly different order and should not be used in conjunction with the covariance matrix. 
+
+
 ### Hubble diagrams
 We provide the Hubble diagram including only the essential information for cosmology (`DES-Dovekie_HD.csv`).
 
